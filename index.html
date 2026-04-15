@@ -1,0 +1,1848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev Roadmap — Evening Study Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Nunito:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:          #eef2ee;
+  --bg-deep:     #e4ebe4;
+  --surface:     #f7faf7;
+  --surface2:    #eff4ef;
+  --mist:        rgba(255,255,255,0.72);
+  --border:      #cdd8cd;
+  --border2:     #b8c8b8;
+  --ink:         #2a3328;
+  --ink2:        #4a5f48;
+  --ink3:        #7a9278;
+  --ink4:        #a0b89e;
+  --sage:        #5a8060;
+  --sage-light:  #e0ede0;
+  --sage-border: #9ec0a0;
+  --amber:       #8a6030;
+  --amber-light: #f0e8d8;
+  --amber-border:#c8a870;
+  --lavender:    #6058a0;
+  --lav-light:   #e8e4f4;
+  --lav-border:  #b0a8d8;
+  --teal:        #3a7878;
+  --teal-light:  #ddf0f0;
+  --teal-border: #88c0c0;
+  --rose:        #906060;
+  --rose-light:  #f5e8e8;
+  --rose-border: #cca0a0;
+  --shadow-sm: 0 1px 8px rgba(42,51,40,0.06);
+  --shadow:    0 3px 16px rgba(42,51,40,0.09);
+  --shadow-lg: 0 8px 32px rgba(42,51,40,0.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Nunito',sans-serif;
+  font-weight:400;
+  line-height:1.6;
+  padding:0 0 80px;
+  position:relative;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 80% 60% at 10% 0%,rgba(144,192,148,.22) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 50% at 90% 10%,rgba(192,180,144,.16) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 70% at 50% 100%,rgba(144,168,196,.14) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 60%,rgba(168,148,196,.10) 0%,transparent 50%);
+}
+.container{max-width:840px;margin:0 auto;padding:32px 20px;position:relative;z-index:1}
+
+/* ── BANNER ── */
+.top-banner{
+  background:var(--mist);border:1px solid var(--border);border-radius:20px;
+  padding:14px 20px;margin-bottom:36px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  box-shadow:var(--shadow-sm);backdrop-filter:blur(8px);
+}
+.banner-text{font-size:13px;color:var(--ink2);line-height:1.55}
+.banner-text strong{color:var(--ink);font-weight:600;display:block}
+.banner-btns{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:8px 18px;border-radius:12px;border:none;
+  font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;
+  cursor:pointer;transition:all .2s;letter-spacing:.02em;text-decoration:none;
+}
+.btn-primary{background:var(--ink);color:var(--bg)}
+.btn-primary:hover{background:var(--sage)}
+.btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--ink2)}
+.btn-ghost:hover{border-color:var(--sage-border);color:var(--sage)}
+
+/* ── HEADER ── */
+header{margin-bottom:32px;animation:fadeUp .6s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.header-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ink3);margin-bottom:12px}
+.header-row{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:24px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(36px,7vw,58px);font-weight:400;line-height:1.05;color:var(--ink);letter-spacing:-.5px}
+h1 em{font-style:italic;color:var(--sage)}
+.time-pill{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:14px 20px;text-align:center;flex-shrink:0;box-shadow:var(--shadow-sm)}
+.time-pill .t{font-family:'Playfair Display',serif;font-size:28px;color:var(--amber)}
+.time-pill .l{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);letter-spacing:2px;text-transform:uppercase;margin-top:3px}
+.progress-wrap{margin-bottom:4px}
+.prog-meta{display:flex;justify-content:space-between;margin-bottom:8px}
+.prog-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase}
+.prog-val{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--sage)}
+.prog-track{height:5px;background:var(--border);border-radius:10px;overflow:hidden}
+.prog-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--teal),var(--sage),var(--amber));background-size:200% 100%;transition:width .8s cubic-bezier(.4,0,.2,1);animation:shimmer 3s linear infinite}
+@keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap}
+.tab{padding:9px 20px;border-radius:12px;border:1px solid var(--border);background:var(--surface);font-family:'Nunito',sans-serif;font-size:13px;font-weight:500;color:var(--ink2);cursor:pointer;transition:all .2s}
+.tab:hover{border-color:var(--border2);color:var(--ink)}
+.tab.active[data-p="py"]{background:var(--sage-light);border-color:var(--sage-border);color:var(--sage)}
+.tab.active[data-p="fs"]{background:var(--amber-light);border-color:var(--amber-border);color:var(--amber)}
+.tab.active[data-p="do"]{background:var(--lav-light);border-color:var(--lav-border);color:var(--lavender)}
+.phase{display:none;animation:fadeUp .35s ease both}
+.phase.show{display:block}
+
+/* ── PHASE INTRO ── */
+.phase-intro{background:var(--mist);border:1px solid var(--border);border-radius:18px;padding:18px 22px;margin-bottom:28px;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--shadow-sm);backdrop-filter:blur(6px)}
+.phase-intro-icon{font-size:30px;flex-shrink:0}
+.phase-intro-text{font-size:13px;color:var(--ink2);line-height:1.75}
+.phase-intro-text strong{color:var(--ink);font-weight:600}
+
+/* ── WEEK ── */
+.week{margin-bottom:32px}
+.week-head{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);text-transform:uppercase;letter-spacing:3px;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:10px}
+.week-head em{font-style:normal;font-family:'Nunito',sans-serif;color:var(--ink2);font-size:12px;font-weight:500;letter-spacing:0}
+
+/* ── DAY CARD ── */
+.card{
+  background:var(--mist);border:1px solid var(--border);border-radius:16px;
+  padding:15px 16px;margin-bottom:7px;
+  display:grid;grid-template-columns:56px 1fr 32px;gap:14px;align-items:start;
+  cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .15s;
+  box-shadow:var(--shadow-sm);backdrop-filter:blur(6px);
+}
+.card:hover{border-color:var(--border2);box-shadow:var(--shadow);transform:translateY(-1px)}
+.card.done{background:var(--sage-light);border-color:var(--sage-border)}
+.card.done:hover{background:#d6e9d6}
+.day-lbl{font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:1.5px;padding-top:3px;line-height:1.9}
+.card.done .day-lbl{color:var(--sage)}
+.card-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:9px;line-height:1.35}
+.card.done .card-title{text-decoration:line-through;color:var(--ink3)}
+.learn-head{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--ink3);text-transform:uppercase;letter-spacing:2px;margin-bottom:5px}
+.learn-list{list-style:none;margin-bottom:10px}
+.learn-list li{font-size:12.5px;color:var(--ink2);padding-left:14px;position:relative;line-height:1.75}
+.learn-list li::before{content:'·';position:absolute;left:2px;color:var(--ink3);font-size:18px;line-height:1.35}
+.learn-list li strong{color:var(--ink);font-weight:600}
+.learn-list li code{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:var(--surface2);border-radius:4px;padding:1px 5px;color:var(--teal);border:1px solid var(--teal-border)}
+.card.done .learn-list li{color:var(--sage-border)}
+.card.done .learn-list li::before{color:var(--sage-border)}
+
+/* ── VIDEO EMBED ── */
+/* ── VIDEO CARD — pure CSS, no external images, guaranteed to work ── */
+.vid-card{
+  display:flex;align-items:center;gap:14px;
+  margin-top:10px;border-radius:14px;overflow:hidden;
+  text-decoration:none;
+  border:1.5px solid var(--border);
+  background:var(--surface);
+  transition:border-color .2s,box-shadow .2s,transform .15s;
+  box-shadow:var(--shadow-sm);
+  padding:12px 14px;
+}
+.vid-card:hover{
+  border-color:var(--sage-border);
+  box-shadow:var(--shadow);
+  transform:translateY(-1px);
+}
+.vid-play-circle{
+  flex-shrink:0;
+  width:48px;height:48px;border-radius:50%;
+  background:linear-gradient(135deg,#cc0000 0%,#ff4444 100%);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 10px rgba(200,0,0,.3);
+  transition:transform .2s,box-shadow .2s;
+}
+.vid-card:hover .vid-play-circle{
+  transform:scale(1.08);
+  box-shadow:0 5px 18px rgba(200,0,0,.4);
+}
+.vid-play-circle::after{
+  content:'';display:block;
+  width:0;height:0;border-style:solid;
+  border-width:9px 0 9px 17px;
+  border-color:transparent transparent transparent #fff;
+  margin-left:4px;
+}
+.vid-info{flex:1;min-width:0}
+.vid-title-text{
+  font-family:'Nunito',sans-serif;
+  font-size:12px;font-weight:600;
+  color:var(--ink);line-height:1.45;
+  margin-bottom:4px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  line-clamp:2;
+}
+.vid-card:hover .vid-title-text{color:var(--sage)}
+.vid-meta{
+  display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.vid-channel{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;color:var(--ink3);letter-spacing:.3px;
+}
+.vid-dur{
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;font-weight:500;
+  background:var(--surface2);border:1px solid var(--border);
+  color:var(--ink2);border-radius:4px;padding:1px 6px;
+}
+.vid-yt-badge{
+  font-family:'JetBrains Mono',monospace;
+  font-size:8px;color:#cc0000;letter-spacing:.5px;
+  margin-left:auto;flex-shrink:0;
+}
+.card.done .vid-card{opacity:.4;pointer-events:none}
+
+
+
+
+/* Tags */
+.ctags{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;letter-spacing:.5px;padding:2px 8px;border-radius:5px;border:1px solid}
+.ctag.py{color:var(--sage);border-color:var(--sage-border);background:var(--sage-light)}
+.ctag.fs{color:var(--amber);border-color:var(--amber-border);background:var(--amber-light)}
+.ctag.do{color:var(--lavender);border-color:var(--lav-border);background:var(--lav-light)}
+.ctag.proj{color:var(--teal);border-color:var(--teal-border);background:var(--teal-light)}
+.ctag.note{color:var(--ink2);border-color:var(--border2);background:var(--surface2)}
+
+/* Check btn */
+.chk{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--border2);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:13px;flex-shrink:0;margin-top:2px;transition:all .2s}
+.chk:hover{border-color:var(--sage);color:var(--sage);background:var(--sage-light)}
+.card.done .chk{background:var(--sage);border-color:var(--sage);color:#fff}
+
+/* Rest card */
+.rest{border:1px dashed var(--border);border-radius:16px;padding:11px 16px;margin-bottom:7px;display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:center}
+.rest-text{font-size:12.5px;color:var(--ink3);font-style:italic}
+
+/* ── QUIZ ── */
+.quiz{background:var(--amber-light);border:1.5px solid var(--amber-border);border-radius:18px;padding:18px 20px;margin-bottom:8px;box-shadow:var(--shadow-sm)}
+.quiz-head{display:flex;align-items:center;gap:10px;margin-bottom:5px}
+.quiz-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;padding:3px 10px;border-radius:6px;letter-spacing:1px;background:#fff;border:1px solid var(--amber-border);color:var(--amber)}
+.quiz-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--ink)}
+.quiz-sub{font-size:12px;color:var(--ink2);margin-bottom:14px}
+.qblock{background:var(--mist);border:1px solid var(--border);border-radius:12px;padding:13px 15px;margin-bottom:8px;backdrop-filter:blur(4px)}
+.q-n{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink3);margin-bottom:5px;letter-spacing:1px}
+.q-t{font-size:13px;color:var(--ink);margin-bottom:9px;line-height:1.6;font-weight:500}
+.q-opts{display:flex;flex-direction:column;gap:5px}
+.q-opt{display:flex;align-items:flex-start;gap:8px;padding:8px 12px;border-radius:9px;border:1px solid var(--border);background:var(--bg);cursor:pointer;transition:all .15s;font-size:12px;color:var(--ink2);line-height:1.45}
+.q-opt:hover{border-color:var(--amber-border);color:var(--ink);background:var(--surface)}
+.q-opt.sel{border-color:var(--amber-border);color:var(--amber);background:rgba(192,168,112,.1)}
+.q-opt.ok{border-color:var(--sage-border);color:var(--sage);background:var(--sage-light)}
+.q-opt.bad{border-color:var(--rose-border);color:var(--rose);background:var(--rose-light)}
+.q-opt input[type=radio]{display:none}
+.quiz-actions{display:flex;gap:8px;margin-top:12px;align-items:center;flex-wrap:wrap}
+.q-submit{background:var(--ink);color:var(--bg);border:none;padding:8px 20px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;cursor:pointer;transition:background .2s;letter-spacing:.5px}
+.q-submit:hover{background:var(--sage)}
+.q-submit:disabled{opacity:.4;cursor:default}
+.q-reset{background:var(--surface);border:1px solid var(--border2);color:var(--ink2);padding:8px 14px;border-radius:10px;font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;transition:all .2s}
+.q-reset:hover{border-color:var(--amber-border);color:var(--amber)}
+.q-score{display:none;font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 12px;border-radius:8px}
+.q-score.show{display:inline-block}
+.q-score.pass{background:var(--sage-light);border:1px solid var(--sage-border);color:var(--sage)}
+.q-score.fail{background:var(--rose-light);border:1px solid var(--rose-border);color:var(--rose)}
+
+/* ── PRACTICE ── */
+.practice{background:var(--teal-light);border:1.5px solid var(--teal-border);border-radius:18px;padding:15px 20px;margin-bottom:8px;box-shadow:var(--shadow-sm)}
+.prac-head{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none}
+.prac-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;padding:3px 10px;border-radius:6px;letter-spacing:1px;flex-shrink:0;background:#fff;border:1px solid var(--teal-border);color:var(--teal)}
+.prac-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:600;color:var(--ink)}
+.prac-toggle{margin-left:auto;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--teal);cursor:pointer;background:none;border:none;flex-shrink:0}
+.prac-body{display:none;padding-top:12px}
+.prac-body.open{display:block}
+.prac-section-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--teal);text-transform:uppercase;letter-spacing:2px;margin:10px 0 6px}
+.prac-task{background:var(--mist);border:1px solid var(--teal-border);border-radius:10px;padding:11px 14px;margin-bottom:6px;font-size:12.5px;color:var(--ink2);line-height:1.75;backdrop-filter:blur(4px)}
+.prac-task strong{color:var(--ink);font-weight:600;display:block;margin-bottom:3px}
+.prac-task code{font-family:'JetBrains Mono',monospace;font-size:10.5px;background:var(--surface2);border-radius:3px;padding:1px 5px;color:var(--teal)}
+
+/* ── MODAL ── */
+.modal-bg{display:none;position:fixed;inset:0;z-index:200;background:rgba(42,51,40,.45);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:30px;max-width:460px;width:100%;position:relative;box-shadow:var(--shadow-lg)}
+.modal h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;margin-bottom:3px}
+.modal-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink3);letter-spacing:1.5px;margin-bottom:20px}
+.modal-close{position:absolute;top:16px;right:16px;background:var(--bg-deep);border:1px solid var(--border);border-radius:50%;width:28px;height:28px;cursor:pointer;color:var(--ink2);font-size:12px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close:hover{background:var(--border)}
+.step{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.step:last-of-type{border-bottom:none;padding-bottom:0}
+.step-n{width:24px;height:24px;border-radius:50%;flex-shrink:0;background:var(--surface2);border:1px solid var(--border2);color:var(--amber);font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;display:flex;align-items:center;justify-content:center}
+.step-text{font-size:12.5px;color:var(--ink2);line-height:1.65}
+.step-text strong{color:var(--ink);display:block;margin-bottom:2px;font-weight:600}
+.step-text code{font-family:'JetBrains Mono',monospace;font-size:10px;background:var(--surface2);border-radius:3px;padding:1px 5px;color:var(--teal)}
+.netlify-btn{display:block;margin-top:18px;text-align:center;background:var(--ink);color:var(--bg);border-radius:14px;padding:13px;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;text-decoration:none;transition:background .2s}
+.netlify-btn:hover{background:var(--sage)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--ink);color:var(--bg);border-radius:12px;padding:10px 22px;font-family:'JetBrains Mono',monospace;font-size:11px;box-shadow:var(--shadow-lg);z-index:999;transition:transform .35s cubic-bezier(.34,1.56,.64,1);white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+@media(max-width:560px){
+  .card{grid-template-columns:44px 1fr 28px;gap:10px}
+  .card-title{font-size:14px}
+  h1{font-size:34px}
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- BANNER -->
+<div class="top-banner">
+  <div class="banner-text">
+    <strong>Share this timetable with anyone</strong>
+    Download · drag to Netlify Drop · share the URL. Everyone tracks their own progress.
+  </div>
+  <div class="banner-btns">
+    <button class="btn btn-primary" onclick="dlFile()">↓ Download</button>
+    <button class="btn btn-ghost" onclick="openModal()">How to Share</button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Share Your Timetable</h3>
+    <div class="modal-sub">FREE · NO ACCOUNT · 2 MINUTES</div>
+    <div class="step"><div class="step-n">1</div><div class="step-text"><strong>Download the file</strong>Click ↓ Download — save <code>dev_roadmap.html</code> to your desktop.</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-text"><strong>Go to Netlify Drop</strong>Open <code>app.netlify.com/drop</code> — no login needed.</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-text"><strong>Drag &amp; drop</strong>Drag your HTML file onto the Netlify page. Deploys in seconds.</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-text"><strong>Share the link!</strong>Get a free URL like <code>abc123.netlify.app</code> — each person tracks their own progress.</div></div>
+    <a class="netlify-btn" href="https://app.netlify.com/drop" target="_blank">→ Open Netlify Drop</a>
+  </div>
+</div>
+<div class="toast" id="toast">Saved! Drag to app.netlify.com/drop to share</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-eyebrow">Evening Study Tracker · 6:30 – 9:00 PM</div>
+  <div class="header-row">
+    <h1>Your Dev<br><em>Roadmap</em></h1>
+    <div class="time-pill"><div class="t">2.5 hrs</div><div class="l">per evening</div></div>
+  </div>
+  <div class="progress-wrap">
+    <div class="prog-meta">
+      <span class="prog-label">Overall Progress</span>
+      <span class="prog-val" id="pCount">0 / 0 days</span>
+    </div>
+    <div class="prog-track"><div class="prog-fill" id="pFill" style="width:0%"></div></div>
+  </div>
+</header>
+
+<!-- TABS -->
+<div class="tabs">
+  <div class="tab active" data-p="py" onclick="switchTab('py')">🐍 Python</div>
+  <div class="tab" data-p="fs" onclick="switchTab('fs')">🌐 Full Stack</div>
+  <div class="tab" data-p="do" onclick="switchTab('do')">⚙️ DevOps</div>
+</div>
+
+
+<!-- ═══════════════ PYTHON ═══════════════ -->
+<div class="phase show" id="phase-py">
+  <div class="phase-intro">
+    <div class="phase-intro-icon">🐍</div>
+    <div class="phase-intro-text">
+      <strong>Code &amp; Debug — Complete Videos 34 onwards</strong><br>
+      Each card has a short, focused video (15–30 min) specific to that topic. Click ▶ to play directly here, or use the link below to open in YouTube.
+    </div>
+  </div>
+
+  <div class="week">
+    <div class="week-head">WEEK 1 — <em>OOP &amp; Advanced Python</em></div>
+
+    <div class="card" id="py1" onclick="tog('py1')">
+      <div class="day-lbl">MON<br>Day 1</div>
+      <div>
+        <div class="card-title">Classes, Objects &amp; Class Methods</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Define a class with <code>__init__</code>, instance vs class variables</li>
+          <li>Instance methods, <code>@classmethod</code>, <code>@staticmethod</code></li>
+          <li>Create objects, call methods, understand <code>self</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=qiSZoBFNTIo&list=PLhR2IpV1b2FzUivnn6TDCVb1ycWYYUmN8&index=33" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Video 33 — Classes &amp; Objects</div>
+            <div class="vid-meta"><span class="vid-channel">Code &amp; Debug</span><span class="vid-dur">~20 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag py">OOP</span></div>
+      </div>
+      <button class="chk" onclick="tog('py1',event)">✓</button>
+    </div>
+
+    <div class="card" id="py2" onclick="tog('py2')">
+      <div class="day-lbl">TUE<br>Day 2</div>
+      <div>
+        <div class="card-title">Exception Handling — Core &amp; Custom</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>try / except / else / finally</code> flow</li>
+          <li>Catching multiple exception types, re-raising errors</li>
+          <li>Build your own exception classes</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=qiSZoBFNTIo&list=PLhR2IpV1b2FzUivnn6TDCVb1ycWYYUmN8&index=34" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Video 34 — Class Variables</div>
+            <div class="vid-meta"><span class="vid-channel">Code &amp; Debug</span><span class="vid-dur">~15 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag py">Exceptions</span></div>
+      </div>
+      <button class="chk" onclick="tog('py2',event)">✓</button>
+    </div>
+
+    <div class="card" id="py3" onclick="tog('py3')">
+      <div class="day-lbl">WED<br>Day 3</div>
+      <div>
+        <div class="card-title">Inheritance &amp; Magic / Dunder Methods</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Single &amp; multiple inheritance, calling <code>super()</code></li>
+          <li>Dunder methods: <code>__str__</code>, <code>__repr__</code>, <code>__len__</code>, <code>__eq__</code></li>
+          <li>Python MRO — how Python picks which method to run</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=qiSZoBFNTIo&list=PLhR2IpV1b2FzUivnn6TDCVb1ycWYYUmN8&index=35" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Video 35 — Inheritance</div>
+            <div class="vid-meta"><span class="vid-channel">Code &amp; Debug</span><span class="vid-dur">~18 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag py">Inheritance</span></div>
+      </div>
+      <button class="chk" onclick="tog('py3',event)">✓</button>
+    </div>
+
+    <div class="card" id="py4" onclick="tog('py4')">
+      <div class="day-lbl">THU<br>Day 4</div>
+      <div>
+        <div class="card-title">Iterators, Generators &amp; Decorators</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Iterables vs Iterators — <code>__iter__</code> and <code>__next__</code></li>
+          <li>Generator functions with <code>yield</code></li>
+          <li>Writing and stacking decorators with <code>@syntax</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=qiSZoBFNTIo&list=PLhR2IpV1b2FzUivnn6TDCVb1ycWYYUmN8&index=36" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Video 36 — Polymorphism</div>
+            <div class="vid-meta"><span class="vid-channel">Code &amp; Debug</span><span class="vid-dur">~16 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag py">Decorators</span></div>
+      </div>
+      <button class="chk" onclick="tog('py4',event)">✓</button>
+    </div>
+
+    <div class="card" id="py5" onclick="tog('py5')">
+      <div class="day-lbl">FRI<br>Day 5</div>
+      <div>
+        <div class="card-title">Static Methods, Access Modifiers &amp; @property</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>@staticmethod</code> — belongs to class, not instance</li>
+          <li>Public, <code>_protected</code>, <code>__private</code> name mangling</li>
+          <li><code>@property</code> for getters/setters without breaking interface</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=qiSZoBFNTIo&list=PLhR2IpV1b2FzUivnn6TDCVb1ycWYYUmN8&index=37" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Video 37 — Encapsulation &amp; Abstraction</div>
+            <div class="vid-meta"><span class="vid-channel">Code &amp; Debug</span><span class="vid-dur">~20 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag py">OOP</span></div>
+      </div>
+      <button class="chk" onclick="tog('py5',event)">✓</button>
+    </div>
+    <div class="rest"><div class="day-lbl">SAT</div><div class="rest-text">Mini project — Bank Account or Student Manager class</div></div>
+    <div class="rest"><div class="day-lbl">SUN</div><div class="rest-text">Rest 🌿</div></div>
+  </div>
+
+  <div class="week">
+    <div class="week-head">WEEK 2 — <em>Libraries, Async &amp; Completion</em></div>
+
+    <div class="card" id="py6" onclick="tog('py6')">
+      <div class="day-lbl">MON<br>Day 6</div>
+      <div>
+        <div class="card-title">Multiple Inheritance &amp; Shallow / Deep Copy</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Diamond problem — solved by MRO + <code>super()</code></li>
+          <li><code>copy.copy()</code> vs <code>copy.deepcopy()</code></li>
+          <li><code>is</code> vs <code>==</code> — identity vs equality</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=qiSZoBFNTIo&list=PLhR2IpV1b2FzUivnn6TDCVb1ycWYYUmN8&index=38" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Video 38 — Exception Handling</div>
+            <div class="vid-meta"><span class="vid-channel">Code &amp; Debug</span><span class="vid-dur">~18 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag py">Memory</span></div>
+      </div>
+      <button class="chk" onclick="tog('py6',event)">✓</button>
+    </div>
+
+    <div class="card" id="py7" onclick="tog('py7')">
+      <div class="day-lbl">TUE<br>Day 7</div>
+      <div>
+        <div class="card-title">Async Programming &amp; Multithreading</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>threading</code> — <code>Thread()</code>, <code>start()</code>, <code>join()</code></li>
+          <li><code>asyncio</code> — <code>async def</code>, <code>await</code>, <code>asyncio.run()</code></li>
+          <li>When to use which: threading vs asyncio vs multiprocessing</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=qiSZoBFNTIo&list=PLhR2IpV1b2FzUivnn6TDCVb1ycWYYUmN8&index=39" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Video 39 — Generators &amp; Decorators</div>
+            <div class="vid-meta"><span class="vid-channel">Code &amp; Debug</span><span class="vid-dur">~22 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag py">Async</span></div>
+      </div>
+      <button class="chk" onclick="tog('py7',event)">✓</button>
+    </div>
+
+    <div class="card" id="py8" onclick="tog('py8')">
+      <div class="day-lbl">WED<br>Day 8</div>
+      <div>
+        <div class="card-title">Logging, PIP &amp; Utility Libraries</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>logging</code> module — levels, file handlers, formatters</li>
+          <li><code>pip freeze</code> → <code>requirements.txt</code>, virtual environments</li>
+          <li><code>zip()</code>, <code>eval()</code>, SHA hashing utilities</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=qiSZoBFNTIo&list=PLhR2IpV1b2FzUivnn6TDCVb1ycWYYUmN8&index=40" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Video 40 — Multithreading &amp; Logging</div>
+            <div class="vid-meta"><span class="vid-channel">Code &amp; Debug</span><span class="vid-dur">~25 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag py">Libraries</span><span class="ctag proj">Course Complete!</span></div>
+      </div>
+      <button class="chk" onclick="tog('py8',event)">✓</button>
+    </div>
+    <div class="rest"><div class="day-lbl">THU–FRI</div><div class="rest-text">Python capstone — CLI app pushed to GitHub</div></div>
+    <div class="rest"><div class="day-lbl">SUN</div><div class="rest-text">🎉 Python complete! Rest before Full Stack.</div></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ FULL STACK ═══════════════ -->
+<div class="phase" id="phase-fs">
+  <div class="phase-intro">
+    <div class="phase-intro-icon">🌐</div>
+    <div class="phase-intro-text">
+      <strong>Full Stack from Absolute Zero — 10 Weeks</strong><br>
+      Every video is short (30–90 min), topic-specific, and plays directly here. Quiz + Practice every 3 topics.
+    </div>
+  </div>
+
+  <div class="week">
+    <div class="week-head">WEEK 1 — <em>How the Web Works + HTML</em></div>
+
+    <div class="card" id="fs1" onclick="tog('fs1')">
+      <div class="day-lbl">MON</div>
+      <div>
+        <div class="card-title">Topic 1 — How the Internet &amp; Web Works</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li><strong>Internet</strong> = a global network of computers talking to each other</li>
+          <li><strong>DNS</strong> converts domain names → IP addresses</li>
+          <li><strong>HTTP vs HTTPS</strong> — HTTPS is encrypted (padlock = safe)</li>
+          <li><strong>Frontend vs Backend</strong> — what you see vs logic &amp; database</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=x3c1ih2NJEg" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">How the Internet Works in 100 Seconds + Deep Dive</div>
+            <div class="vid-meta"><span class="vid-channel">Fireship</span><span class="vid-dur">~9 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 1</span><span class="ctag fs">Concepts</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs1',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs2" onclick="tog('fs2')">
+      <div class="day-lbl">TUE</div>
+      <div>
+        <div class="card-title">Topic 2 — HTML Basics (Your First Web Page)</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Tags: <code>&lt;h1&gt;–&lt;h6&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;img&gt;</code>, <code>&lt;ul&gt;/&lt;li&gt;</code></li>
+          <li>Attributes: <code>href</code>, <code>src</code>, <code>alt</code>, <code>id</code>, <code>class</code></li>
+          <li>Create <code>index.html</code> and open in browser — no tools needed!</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=UB1O30fR-EE" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">HTML Crash Course for Absolute Beginners</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 2</span><span class="ctag fs">HTML</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs2',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs3" onclick="tog('fs3')">
+      <div class="day-lbl">WED</div>
+      <div>
+        <div class="card-title">Topic 3 — Semantic HTML &amp; Forms</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Semantic tags — <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code></li>
+          <li>Forms — <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;label&gt;</code></li>
+          <li>Input types: text, email, password, checkbox, radio, submit</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=HJ0-fUJ-2F0" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">HTML Forms &amp; Inputs (All You Need to Know)</div>
+            <div class="vid-meta"><span class="vid-channel">Web Dev Simplified</span><span class="vid-dur">~30 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 3</span><span class="ctag fs">HTML</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs3',event)">✓</button>
+    </div>
+
+    <!-- QUIZ 1 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 1</div><div class="quiz-title">Test: Internet, HTML &amp; Forms</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="fsQ1a"><div class="q-n">Q1 OF 4</div><div class="q-t">What does HTML stand for?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ1a','a')"><input type="radio" name="fsQ1a" value="a"> HyperText Markup Language</div><div class="q-opt" onclick="pick('fsQ1a','b')"><input type="radio" name="fsQ1a" value="b"> High Transfer Markup Language</div><div class="q-opt" onclick="pick('fsQ1a','c')"><input type="radio" name="fsQ1a" value="c"> HyperText Machine Learning</div><div class="q-opt" onclick="pick('fsQ1a','d')"><input type="radio" name="fsQ1a" value="d"> Home Text Markup Language</div></div></div>
+      <div class="qblock" id="fsQ1b"><div class="q-n">Q2 OF 4</div><div class="q-t">Correct semantic tag for page navigation?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ1b','a')"><input type="radio" name="fsQ1b" value="a"> &lt;div class="nav"&gt;</div><div class="q-opt" onclick="pick('fsQ1b','b')"><input type="radio" name="fsQ1b" value="b"> &lt;navigation&gt;</div><div class="q-opt" onclick="pick('fsQ1b','c')"><input type="radio" name="fsQ1b" value="c"> &lt;nav&gt;</div><div class="q-opt" onclick="pick('fsQ1b','d')"><input type="radio" name="fsQ1b" value="d"> &lt;menu&gt;</div></div></div>
+      <div class="qblock" id="fsQ1c"><div class="q-n">Q3 OF 4</div><div class="q-t">What does DNS do?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ1c','a')"><input type="radio" name="fsQ1c" value="a"> Encrypts internet traffic</div><div class="q-opt" onclick="pick('fsQ1c','b')"><input type="radio" name="fsQ1c" value="b"> Converts domain names into IP addresses</div><div class="q-opt" onclick="pick('fsQ1c','c')"><input type="radio" name="fsQ1c" value="c"> Stores browser history</div><div class="q-opt" onclick="pick('fsQ1c','d')"><input type="radio" name="fsQ1c" value="d"> Downloads HTML files</div></div></div>
+      <div class="qblock" id="fsQ1d"><div class="q-n">Q4 OF 4</div><div class="q-t">Which input type hides characters as you type?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ1d','a')"><input type="radio" name="fsQ1d" value="a"> type="text"</div><div class="q-opt" onclick="pick('fsQ1d','b')"><input type="radio" name="fsQ1d" value="b"> type="secret"</div><div class="q-opt" onclick="pick('fsQ1d','c')"><input type="radio" name="fsQ1d" value="c"> type="hidden"</div><div class="q-opt" onclick="pick('fsQ1d','d')"><input type="radio" name="fsQ1d" value="d"> type="password"</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('fsQ1',['a','c','b','d'],['fsQ1a','fsQ1b','fsQ1c','fsQ1d'])">Submit</button><button class="q-reset" onclick="resetQuiz('fsQ1',['fsQ1a','fsQ1b','fsQ1c','fsQ1d'])">Reset</button><span class="q-score" id="fsQ1-score"></span></div>
+    </div>
+    <div class="practice">
+      <div class="prac-head" onclick="togPrac('pfQ1')"><div class="prac-badge">💪 PRACTICE 1</div><div class="prac-title">HTML Exercises</div><button class="prac-toggle">▼ Expand</button></div>
+      <div class="prac-body" id="pfQ1">
+        <div class="prac-section-lbl">Exercise 1</div><div class="prac-task"><strong>Bio Page:</strong> <code>index.html</code> — name in <code>&lt;h1&gt;</code>, paragraph, hobbies list, external link.</div>
+        <div class="prac-section-lbl">Exercise 2</div><div class="prac-task"><strong>Semantic Structure:</strong> Rebuild with header, nav, main, footer.</div>
+        <div class="prac-section-lbl">🔥 Challenge</div><div class="prac-task"><strong>Contact Form:</strong> Name, email, subject dropdown, message textarea, submit button — all with <code>&lt;label&gt;</code> tags.</div>
+      </div>
+    </div>
+
+    <div class="card" id="fs4" onclick="tog('fs4')">
+      <div class="day-lbl">THU</div>
+      <div>
+        <div class="card-title">Topic 4 — CSS Basics &amp; Box Model</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li>Selectors: element, class (<code>.name</code>), id (<code>#title</code>)</li>
+          <li>Properties: <code>color</code>, <code>background</code>, <code>font-size</code>, <code>margin</code>, <code>padding</code></li>
+          <li><strong>Box Model</strong> — content → padding → border → margin</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=yfoY53QXEnI" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">CSS Crash Course for Absolute Beginners</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~1 hr 25 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 4</span><span class="ctag fs">CSS</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs4',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs5" onclick="tog('fs5')">
+      <div class="day-lbl">FRI</div>
+      <div>
+        <div class="card-title">Topic 5 — CSS Flexbox</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>display: flex</code> on parent → children become flex items</li>
+          <li><code>justify-content</code>: center, space-between, space-around</li>
+          <li><code>align-items</code>: center, flex-start, stretch</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=fYq5PXgSsbE" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Learn Flexbox in 15 Minutes</div>
+            <div class="vid-meta"><span class="vid-channel">Web Dev Simplified</span><span class="vid-dur">~15 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 5</span><span class="ctag fs">CSS</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs5',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs6" onclick="tog('fs6')">
+      <div class="day-lbl">SAT</div>
+      <div>
+        <div class="card-title">Topic 6 — CSS Grid &amp; Responsive Design</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>grid-template-columns: repeat(3, 1fr)</code> → 3 equal columns</li>
+          <li><strong>Media Queries</strong> — <code>@media (max-width: 768px) { ... }</code></li>
+          <li>Mobile-first: design for small screens, scale up</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=9zBsdzdE4sM" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Learn CSS Grid in 20 Minutes</div>
+            <div class="vid-meta"><span class="vid-channel">Web Dev Simplified</span><span class="vid-dur">~20 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 6</span><span class="ctag fs">CSS Grid</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs6',event)">✓</button>
+    </div>
+
+    <!-- QUIZ 2 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 2</div><div class="quiz-title">Test: CSS, Flexbox &amp; Grid</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="fsQ2a"><div class="q-n">Q1 OF 4</div><div class="q-t">Box Model order from inside to outside?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ2a','a')"><input type="radio" name="fsQ2a" value="a"> Content → Border → Padding → Margin</div><div class="q-opt" onclick="pick('fsQ2a','b')"><input type="radio" name="fsQ2a" value="b"> Margin → Padding → Border → Content</div><div class="q-opt" onclick="pick('fsQ2a','c')"><input type="radio" name="fsQ2a" value="c"> Content → Padding → Border → Margin</div><div class="q-opt" onclick="pick('fsQ2a','d')"><input type="radio" name="fsQ2a" value="d"> Padding → Content → Margin → Border</div></div></div>
+      <div class="qblock" id="fsQ2b"><div class="q-n">Q2 OF 4</div><div class="q-t">Which property makes a flex container?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ2b','a')"><input type="radio" name="fsQ2b" value="a"> position: flex</div><div class="q-opt" onclick="pick('fsQ2b','b')"><input type="radio" name="fsQ2b" value="b"> display: flex</div><div class="q-opt" onclick="pick('fsQ2b','c')"><input type="radio" name="fsQ2b" value="c"> layout: flex</div><div class="q-opt" onclick="pick('fsQ2b','d')"><input type="radio" name="fsQ2b" value="d"> flex: true</div></div></div>
+      <div class="qblock" id="fsQ2c"><div class="q-n">Q3 OF 4</div><div class="q-t"><code>justify-content: space-between</code> does?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ2c','a')"><input type="radio" name="fsQ2c" value="a"> Centers all items</div><div class="q-opt" onclick="pick('fsQ2c','b')"><input type="radio" name="fsQ2c" value="b"> Equal space around each item</div><div class="q-opt" onclick="pick('fsQ2c','c')"><input type="radio" name="fsQ2c" value="c"> First item at start, last at end, equal space between</div><div class="q-opt" onclick="pick('fsQ2c','d')"><input type="radio" name="fsQ2c" value="d"> Stretches items to fill container</div></div></div>
+      <div class="qblock" id="fsQ2d"><div class="q-n">Q4 OF 4</div><div class="q-t"><code>@media (max-width: 600px)</code> targets?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ2d','a')"><input type="radio" name="fsQ2d" value="a"> Screens wider than 600px</div><div class="q-opt" onclick="pick('fsQ2d','b')"><input type="radio" name="fsQ2d" value="b"> Screens 600px wide or narrower (mobile)</div><div class="q-opt" onclick="pick('fsQ2d','c')"><input type="radio" name="fsQ2d" value="c"> Sets page max-width to 600px</div><div class="q-opt" onclick="pick('fsQ2d','d')"><input type="radio" name="fsQ2d" value="d"> Hides all on mobile</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('fsQ2',['c','b','c','b'],['fsQ2a','fsQ2b','fsQ2c','fsQ2d'])">Submit</button><button class="q-reset" onclick="resetQuiz('fsQ2',['fsQ2a','fsQ2b','fsQ2c','fsQ2d'])">Reset</button><span class="q-score" id="fsQ2-score"></span></div>
+    </div>
+    <div class="practice">
+      <div class="prac-head" onclick="togPrac('pfQ2')"><div class="prac-badge">💪 PRACTICE 2</div><div class="prac-title">CSS Exercises</div><button class="prac-toggle">▼ Expand</button></div>
+      <div class="prac-body" id="pfQ2">
+        <div class="prac-section-lbl">Exercise 1</div><div class="prac-task"><strong>Style Resume:</strong> Link CSS, add background, custom font, coloured headings, padding.</div>
+        <div class="prac-section-lbl">Exercise 2</div><div class="prac-task"><strong>Flexbox Navbar:</strong> Logo left, links right. Make it sticky.</div>
+        <div class="prac-section-lbl">🔥 Challenge</div><div class="prac-task"><strong>Card Grid:</strong> 6 project cards — 3 cols desktop, 1 col mobile. Media query at 768px.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- W2: JS -->
+  <div class="week">
+    <div class="week-head">WEEK 2 — <em>JavaScript Fundamentals</em></div>
+
+    <div class="card" id="fs7" onclick="tog('fs7')">
+      <div class="day-lbl">MON</div>
+      <div>
+        <div class="card-title">Topic 7 — JavaScript Intro &amp; Variables</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li><code>let</code> (changeable), <code>const</code> (fixed) — avoid <code>var</code></li>
+          <li>Types: string, number, boolean, null, undefined</li>
+          <li><code>console.log()</code> — your best debugging friend</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=hdI2bqOjy3c" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">JavaScript Crash Course for Beginners</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~1 hr 40 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 7</span><span class="ctag fs">JavaScript</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs7',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs8" onclick="tog('fs8')">
+      <div class="day-lbl">TUE</div>
+      <div>
+        <div class="card-title">Topic 8 — Functions, Conditions &amp; Loops</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Arrow functions: <code>const add = (a, b) =&gt; a + b;</code></li>
+          <li><code>if / else if / else</code> conditions</li>
+          <li>Loops: <code>for</code>, <code>while</code>, <code>for...of</code> (arrays)</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=_y9oxzTvLqY" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">JavaScript Functions &amp; Loops Explained</div>
+            <div class="vid-meta"><span class="vid-channel">Web Dev Simplified</span><span class="vid-dur">~20 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 8</span><span class="ctag fs">JavaScript</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs8',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs9" onclick="tog('fs9')">
+      <div class="day-lbl">WED</div>
+      <div>
+        <div class="card-title">Topic 9 — DOM Manipulation</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>document.querySelector(".class")</code> — grab any element</li>
+          <li>Change text: <code>el.textContent = "Hello"</code></li>
+          <li>Events: <code>btn.addEventListener("click", () =&gt; {})</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=0ik6X4DJKCc" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">JavaScript DOM Crash Course Part 1</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~40 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 9</span><span class="ctag fs">DOM</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs9',event)">✓</button>
+    </div>
+
+    <!-- QUIZ 3 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 3</div><div class="quiz-title">Test: JS Basics &amp; DOM</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="fsQ3a"><div class="q-n">Q1 OF 4</div><div class="q-t">Difference between <code>==</code> and <code>===</code>?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ3a','a')"><input type="radio" name="fsQ3a" value="a"> No difference</div><div class="q-opt" onclick="pick('fsQ3a','b')"><input type="radio" name="fsQ3a" value="b"> == checks value only; === checks value AND type</div><div class="q-opt" onclick="pick('fsQ3a','c')"><input type="radio" name="fsQ3a" value="c"> == is for strings; === for numbers</div><div class="q-opt" onclick="pick('fsQ3a','d')"><input type="radio" name="fsQ3a" value="d"> === is faster</div></div></div>
+      <div class="qblock" id="fsQ3b"><div class="q-n">Q2 OF 4</div><div class="q-t">What does <code>fruits.push("mango")</code> do?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ3b','a')"><input type="radio" name="fsQ3b" value="a"> Throws an error</div><div class="q-opt" onclick="pick('fsQ3b','b')"><input type="radio" name="fsQ3b" value="b"> Adds "mango" to end of array</div><div class="q-opt" onclick="pick('fsQ3b','c')"><input type="radio" name="fsQ3b" value="c"> Replaces first item</div><div class="q-opt" onclick="pick('fsQ3b','d')"><input type="radio" name="fsQ3b" value="d"> Creates a new array</div></div></div>
+      <div class="qblock" id="fsQ3c"><div class="q-n">Q3 OF 4</div><div class="q-t">How do you add a click event?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ3c','a')"><input type="radio" name="fsQ3c" value="a"> button.onClick(fn)</div><div class="q-opt" onclick="pick('fsQ3c','b')"><input type="radio" name="fsQ3c" value="b"> button.listen("click", fn)</div><div class="q-opt" onclick="pick('fsQ3c','c')"><input type="radio" name="fsQ3c" value="c"> button.addEventListener("click", fn)</div><div class="q-opt" onclick="pick('fsQ3c','d')"><input type="radio" name="fsQ3c" value="d"> button.addEvent("click", fn)</div></div></div>
+      <div class="qblock" id="fsQ3d"><div class="q-n">Q4 OF 4</div><div class="q-t">DOM stands for?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ3d','a')"><input type="radio" name="fsQ3d" value="a"> Document Object Model</div><div class="q-opt" onclick="pick('fsQ3d','b')"><input type="radio" name="fsQ3d" value="b"> Data Object Method</div><div class="q-opt" onclick="pick('fsQ3d','c')"><input type="radio" name="fsQ3d" value="c"> Dynamic Object Module</div><div class="q-opt" onclick="pick('fsQ3d','d')"><input type="radio" name="fsQ3d" value="d"> Document Oriented Markup</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('fsQ3',['b','b','c','a'],['fsQ3a','fsQ3b','fsQ3c','fsQ3d'])">Submit</button><button class="q-reset" onclick="resetQuiz('fsQ3',['fsQ3a','fsQ3b','fsQ3c','fsQ3d'])">Reset</button><span class="q-score" id="fsQ3-score"></span></div>
+    </div>
+    <div class="practice">
+      <div class="prac-head" onclick="togPrac('pfQ3')"><div class="prac-badge">💪 PRACTICE 3</div><div class="prac-title">JavaScript DOM Projects</div><button class="prac-toggle">▼ Expand</button></div>
+      <div class="prac-body" id="pfQ3">
+        <div class="prac-section-lbl">Exercise 1</div><div class="prac-task"><strong>Counter App:</strong> +1, -1, Reset. Red when negative, green when positive.</div>
+        <div class="prac-section-lbl">Exercise 2</div><div class="prac-task"><strong>To-Do List:</strong> Add task, mark done (strikethrough), delete.</div>
+        <div class="prac-section-lbl">🔥 Challenge</div><div class="prac-task"><strong>Guessing Game:</strong> JS picks 1–100. User guesses. Show "Too high / Too low / Correct! X attempts".</div>
+      </div>
+    </div>
+
+    <div class="card" id="fs10" onclick="tog('fs10')">
+      <div class="day-lbl">THU</div>
+      <div>
+        <div class="card-title">Topic 10 — Async JS &amp; Fetch API</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li>Callbacks → Promises → <code>async/await</code> (cleanest)</li>
+          <li><code>const res = await fetch("https://api.example.com")</code></li>
+          <li><code>const data = await res.json()</code></li>
+          <li>Always wrap in <code>try/catch</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=PoRJizFvM7s" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Async JS Crash Course (Callbacks, Promises, Async/Await)</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 10</span><span class="ctag fs">Async</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs10',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs11" onclick="tog('fs11')">
+      <div class="day-lbl">FRI</div>
+      <div>
+        <div class="card-title">Topic 11 — ES6+ Modern JavaScript</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Destructuring: <code>const {name} = person</code></li>
+          <li>Spread: <code>[...arr1, ...arr2]</code></li>
+          <li>Array methods: <code>map()</code>, <code>filter()</code>, <code>reduce()</code></li>
+          <li>Template literals: <code>`Hello ${name}!`</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=NCwa_xi0Uuc" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">ES6 Crash Course for Beginners</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~1 hr 10 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 11</span><span class="ctag fs">ES6+</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs11',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs12" onclick="tog('fs12')">
+      <div class="day-lbl">SAT</div>
+      <div>
+        <div class="card-title">Topic 12 — Build: Fetch API Weather App</div>
+        <div class="learn-head">What to Build</div>
+        <ul class="learn-list">
+          <li>Fetch from OpenWeatherMap API using async/await</li>
+          <li>User types city → display temperature, description, humidity</li>
+          <li>Handle errors: city not found → friendly message</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=Oive66jrwBs" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Fetch API Introduction (Crash Course)</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~35 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag proj">Project</span><span class="ctag fs">API</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs12',event)">✓</button>
+    </div>
+
+    <!-- QUIZ 4 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 4</div><div class="quiz-title">Test: Async JS, ES6 &amp; APIs</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="fsQ4a"><div class="q-n">Q1 OF 4</div><div class="q-t">What does <code>const [a, b] = [10, 20]</code> do?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ4a','a')"><input type="radio" name="fsQ4a" value="a"> Creates an array</div><div class="q-opt" onclick="pick('fsQ4a','b')"><input type="radio" name="fsQ4a" value="b"> Destructures — a=10, b=20</div><div class="q-opt" onclick="pick('fsQ4a','c')"><input type="radio" name="fsQ4a" value="c"> Throws an error</div><div class="q-opt" onclick="pick('fsQ4a','d')"><input type="radio" name="fsQ4a" value="d"> Swaps a and b</div></div></div>
+      <div class="qblock" id="fsQ4b"><div class="q-n">Q2 OF 4</div><div class="q-t"><code>[1,2,3,4].filter(n => n > 2)</code> returns?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ4b','a')"><input type="radio" name="fsQ4b" value="a"> [1, 2]</div><div class="q-opt" onclick="pick('fsQ4b','b')"><input type="radio" name="fsQ4b" value="b"> [3, 4]</div><div class="q-opt" onclick="pick('fsQ4b','c')"><input type="radio" name="fsQ4b" value="c"> [2, 3, 4]</div><div class="q-opt" onclick="pick('fsQ4b','d')"><input type="radio" name="fsQ4b" value="d"> true</div></div></div>
+      <div class="qblock" id="fsQ4c"><div class="q-n">Q3 OF 4</div><div class="q-t">Keyword to wait for a Promise?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ4c','a')"><input type="radio" name="fsQ4c" value="a"> wait</div><div class="q-opt" onclick="pick('fsQ4c','b')"><input type="radio" name="fsQ4c" value="b"> pause</div><div class="q-opt" onclick="pick('fsQ4c','c')"><input type="radio" name="fsQ4c" value="c"> await</div><div class="q-opt" onclick="pick('fsQ4c','d')"><input type="radio" name="fsQ4c" value="d"> hold</div></div></div>
+      <div class="qblock" id="fsQ4d"><div class="q-n">Q4 OF 4</div><div class="q-t">After <code>const res = await fetch(url)</code>, how to get JSON?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ4d','a')"><input type="radio" name="fsQ4d" value="a"> res.data()</div><div class="q-opt" onclick="pick('fsQ4d','b')"><input type="radio" name="fsQ4d" value="b"> res.parse()</div><div class="q-opt" onclick="pick('fsQ4d','c')"><input type="radio" name="fsQ4d" value="c"> JSON.parse(res)</div><div class="q-opt" onclick="pick('fsQ4d','d')"><input type="radio" name="fsQ4d" value="d"> await res.json()</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('fsQ4',['b','b','c','d'],['fsQ4a','fsQ4b','fsQ4c','fsQ4d'])">Submit</button><button class="q-reset" onclick="resetQuiz('fsQ4',['fsQ4a','fsQ4b','fsQ4c','fsQ4d'])">Reset</button><span class="q-score" id="fsQ4-score"></span></div>
+    </div>
+    <div class="practice">
+      <div class="prac-head" onclick="togPrac('pfQ4')"><div class="prac-badge">💪 PRACTICE 4</div><div class="prac-title">Async &amp; API Exercises</div><button class="prac-toggle">▼ Expand</button></div>
+      <div class="prac-body" id="pfQ4">
+        <div class="prac-section-lbl">Exercise 1</div><div class="prac-task"><strong>Fetch Users:</strong> <code>jsonplaceholder.typicode.com/users</code> — display name, email, city as cards.</div>
+        <div class="prac-section-lbl">🔥 Challenge</div><div class="prac-task"><strong>GitHub Profile Finder:</strong> <code>api.github.com/users/USERNAME</code> — avatar, bio, followers, repos.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- W3-4: React -->
+  <div class="week">
+    <div class="week-head">WEEK 3–4 — <em>React.js from Zero</em></div>
+
+    <div class="card" id="fs13" onclick="tog('fs13')">
+      <div class="day-lbl">MON W3</div>
+      <div>
+        <div class="card-title">Topic 13 — React Intro, JSX &amp; Components</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li>Setup: <code>npm create vite@latest my-app --template react</code></li>
+          <li><strong>Component</strong> = self-contained piece of UI. Everything in React is a component</li>
+          <li><strong>JSX</strong> = HTML inside JS. Use <code>className</code> not <code>class</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=Ke90Tje7VS0" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">React Crash Course for Beginners</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~1 hr 30 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 13</span><span class="ctag fs">React</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs13',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs14" onclick="tog('fs14')">
+      <div class="day-lbl">TUE W3</div>
+      <div>
+        <div class="card-title">Topic 14 — State &amp; Props (useState)</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><strong>Props</strong> = read-only data from parent to child</li>
+          <li><code>const [count, setCount] = useState(0)</code></li>
+          <li>Never modify state directly — always use the setter</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=O6P86uwfdR0" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">React useState in 15 Minutes</div>
+            <div class="vid-meta"><span class="vid-channel">Web Dev Simplified</span><span class="vid-dur">~15 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 14</span><span class="ctag fs">React</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs14',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs15" onclick="tog('fs15')">
+      <div class="day-lbl">WED W3</div>
+      <div>
+        <div class="card-title">Topic 15 — useEffect &amp; Data Fetching</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>useEffect(() =&gt; { fetchData(); }, [])</code> — runs once on mount</li>
+          <li>Dependency array controls when effect re-runs</li>
+          <li>Loading state: show spinner while fetching</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=0ZJgIjIuY7U" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">React useEffect in 15 Minutes</div>
+            <div class="vid-meta"><span class="vid-channel">Web Dev Simplified</span><span class="vid-dur">~15 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 15</span><span class="ctag fs">React</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs15',event)">✓</button>
+    </div>
+
+    <!-- QUIZ 5 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 5</div><div class="quiz-title">Test: React Fundamentals</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="fsQ5a"><div class="q-n">Q1 OF 4</div><div class="q-t">Correct way to update state?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ5a','a')"><input type="radio" name="fsQ5a" value="a"> count = count + 1</div><div class="q-opt" onclick="pick('fsQ5a','b')"><input type="radio" name="fsQ5a" value="b"> this.state.count++</div><div class="q-opt" onclick="pick('fsQ5a','c')"><input type="radio" name="fsQ5a" value="c"> setCount(count + 1)</div><div class="q-opt" onclick="pick('fsQ5a','d')"><input type="radio" name="fsQ5a" value="d"> setState({count: count+1})</div></div></div>
+      <div class="qblock" id="fsQ5b"><div class="q-n">Q2 OF 4</div><div class="q-t">Empty <code>[]</code> in useEffect means?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ5b','a')"><input type="radio" name="fsQ5b" value="a"> Effect never runs</div><div class="q-opt" onclick="pick('fsQ5b','b')"><input type="radio" name="fsQ5b" value="b"> Runs on every render</div><div class="q-opt" onclick="pick('fsQ5b','c')"><input type="radio" name="fsQ5b" value="c"> Runs once on mount</div><div class="q-opt" onclick="pick('fsQ5b','d')"><input type="radio" name="fsQ5b" value="d"> Runs when state changes</div></div></div>
+      <div class="qblock" id="fsQ5c"><div class="q-n">Q3 OF 4</div><div class="q-t">What are Props?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ5c','a')"><input type="radio" name="fsQ5c" value="a"> Internal component state</div><div class="q-opt" onclick="pick('fsQ5c','b')"><input type="radio" name="fsQ5c" value="b"> Read-only data from parent to child</div><div class="q-opt" onclick="pick('fsQ5c','c')"><input type="radio" name="fsQ5c" value="c"> CSS properties</div><div class="q-opt" onclick="pick('fsQ5c','d')"><input type="radio" name="fsQ5c" value="d"> JS functions in JSX</div></div></div>
+      <div class="qblock" id="fsQ5d"><div class="q-n">Q4 OF 4</div><div class="q-t">In JSX, <code>class</code> is replaced by?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ5d','a')"><input type="radio" name="fsQ5d" value="a"> cssClass</div><div class="q-opt" onclick="pick('fsQ5d','b')"><input type="radio" name="fsQ5d" value="b"> htmlClass</div><div class="q-opt" onclick="pick('fsQ5d','c')"><input type="radio" name="fsQ5d" value="c"> className</div><div class="q-opt" onclick="pick('fsQ5d','d')"><input type="radio" name="fsQ5d" value="d"> styleClass</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('fsQ5',['c','c','b','c'],['fsQ5a','fsQ5b','fsQ5c','fsQ5d'])">Submit</button><button class="q-reset" onclick="resetQuiz('fsQ5',['fsQ5a','fsQ5b','fsQ5c','fsQ5d'])">Reset</button><span class="q-score" id="fsQ5-score"></span></div>
+    </div>
+    <div class="practice">
+      <div class="prac-head" onclick="togPrac('pfQ5')"><div class="prac-badge">💪 PRACTICE 5</div><div class="prac-title">React Components</div><button class="prac-toggle">▼ Expand</button></div>
+      <div class="prac-body" id="pfQ5">
+        <div class="prac-section-lbl">Exercise 1</div><div class="prac-task"><strong>Counter:</strong> useState, +/−/Reset, show "Max!" at 10.</div>
+        <div class="prac-section-lbl">🔥 Challenge</div><div class="prac-task"><strong>Fetch Posts:</strong> Fetch jsonplaceholder posts in useEffect. Search input filters by title. Loading spinner.</div>
+      </div>
+    </div>
+
+    <div class="card" id="fs16" onclick="tog('fs16')">
+      <div class="day-lbl">THU W3</div>
+      <div>
+        <div class="card-title">Topic 16 — React Router</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>npm install react-router-dom</code></li>
+          <li>Wrap in <code>&lt;BrowserRouter&gt;</code>, define routes</li>
+          <li><code>&lt;Link to="/about"&gt;</code> not <code>&lt;a href&gt;</code></li>
+          <li><code>useParams()</code> for URL params like <code>/user/:id</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=Ul3y1LXxzdU" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">React Router v6 in 45 Minutes</div>
+            <div class="vid-meta"><span class="vid-channel">Web Dev Simplified</span><span class="vid-dur">~45 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag fs">React Router</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs16',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs17" onclick="tog('fs17')">
+      <div class="day-lbl">FRI W3</div>
+      <div>
+        <div class="card-title">Topic 17 — Tailwind CSS</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Utility-first: style in JSX — <code>className="bg-blue-500 text-white p-4 rounded"</code></li>
+          <li>Responsive: <code>md:flex</code> = flex on medium+</li>
+          <li>Hover: <code>hover:bg-blue-700</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=dFgzHOX84xQ" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Tailwind CSS Crash Course</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag fs">Tailwind</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs17',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs18" onclick="tog('fs18')">
+      <div class="day-lbl">MON W4</div>
+      <div>
+        <div class="card-title">Topic 18 — Node.js Crash Course</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li>JS runs on the server — not just the browser</li>
+          <li>Built-ins: <code>fs</code>, <code>path</code>, <code>http</code></li>
+          <li><code>npm init</code> creates <code>package.json</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=fBNz5xF-Kx4" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Node.js Crash Course</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~1 hr 30 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 18</span><span class="ctag fs">Node.js</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs18',event)">✓</button>
+    </div>
+  </div>
+
+  <!-- W5-6: Backend -->
+  <div class="week">
+    <div class="week-head">WEEK 5–6 — <em>Express + MongoDB + Auth</em></div>
+
+    <div class="card" id="fs19" onclick="tog('fs19')">
+      <div class="day-lbl">MON W5</div>
+      <div>
+        <div class="card-title">Topic 19 — Express.js REST API</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Routes: GET, POST, PUT, DELETE</li>
+          <li>Middleware — functions between request and response</li>
+          <li>Status codes: 200, 201, 404, 500</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=SccSCuHhOw0" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Express Crash Course</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 19</span><span class="ctag fs">Express</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs19',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs20" onclick="tog('fs20')">
+      <div class="day-lbl">TUE W5</div>
+      <div>
+        <div class="card-title">Topic 20 — MongoDB &amp; Mongoose</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li>Free cloud DB at <code>mongodb.com/atlas</code></li>
+          <li>Schema → Model → <code>.create()</code>, <code>.find()</code>, <code>.findByIdAndUpdate()</code></li>
+          <li>JSON-like documents — not rows and columns</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=-56x56UppqQ" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">MongoDB Crash Course</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~40 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 20</span><span class="ctag fs">MongoDB</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs20',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs21" onclick="tog('fs21')">
+      <div class="day-lbl">WED W5</div>
+      <div>
+        <div class="card-title">Topic 21 — JWT Authentication</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>bcrypt</code> hashes passwords — never store plain text</li>
+          <li>JWT = signed token like a VIP wristband</li>
+          <li>Flow: Register → hash → save → login → verify → issue JWT</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=mbsmsi7l3r4" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">JWT Authentication in 15 Minutes</div>
+            <div class="vid-meta"><span class="vid-channel">Web Dev Simplified</span><span class="vid-dur">~15 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag fs">Auth</span><span class="ctag fs">JWT</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs21',event)">✓</button>
+    </div>
+
+    <!-- QUIZ 6 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 6</div><div class="quiz-title">Test: Node, Express &amp; MongoDB</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="fsQ6a"><div class="q-n">Q1 OF 4</div><div class="q-t">Which HTTP method creates a new resource?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ6a','a')"><input type="radio" name="fsQ6a" value="a"> GET</div><div class="q-opt" onclick="pick('fsQ6a','b')"><input type="radio" name="fsQ6a" value="b"> POST</div><div class="q-opt" onclick="pick('fsQ6a','c')"><input type="radio" name="fsQ6a" value="c"> PUT</div><div class="q-opt" onclick="pick('fsQ6a','d')"><input type="radio" name="fsQ6a" value="d"> DELETE</div></div></div>
+      <div class="qblock" id="fsQ6b"><div class="q-n">Q2 OF 4</div><div class="q-t">Express middleware is?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ6b','a')"><input type="radio" name="fsQ6b" value="a"> A database type</div><div class="q-opt" onclick="pick('fsQ6b','b')"><input type="radio" name="fsQ6b" value="b"> A function running between request and response</div><div class="q-opt" onclick="pick('fsQ6b','c')"><input type="radio" name="fsQ6b" value="c"> A CSS method</div><div class="q-opt" onclick="pick('fsQ6b','d')"><input type="radio" name="fsQ6b" value="d"> Middle of webpage</div></div></div>
+      <div class="qblock" id="fsQ6c"><div class="q-n">Q3 OF 4</div><div class="q-t">HTTP 404 means?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ6c','a')"><input type="radio" name="fsQ6c" value="a"> OK</div><div class="q-opt" onclick="pick('fsQ6c','b')"><input type="radio" name="fsQ6c" value="b"> Server Error</div><div class="q-opt" onclick="pick('fsQ6c','c')"><input type="radio" name="fsQ6c" value="c"> Not Found</div><div class="q-opt" onclick="pick('fsQ6c','d')"><input type="radio" name="fsQ6c" value="d"> Redirect</div></div></div>
+      <div class="qblock" id="fsQ6d"><div class="q-n">Q4 OF 4</div><div class="q-t">MongoDB "collection" ≈ SQL?</div><div class="q-opts"><div class="q-opt" onclick="pick('fsQ6d','a')"><input type="radio" name="fsQ6d" value="a"> Row</div><div class="q-opt" onclick="pick('fsQ6d','b')"><input type="radio" name="fsQ6d" value="b"> Column</div><div class="q-opt" onclick="pick('fsQ6d','c')"><input type="radio" name="fsQ6d" value="c"> Table</div><div class="q-opt" onclick="pick('fsQ6d','d')"><input type="radio" name="fsQ6d" value="d"> Database</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('fsQ6',['b','b','c','c'],['fsQ6a','fsQ6b','fsQ6c','fsQ6d'])">Submit</button><button class="q-reset" onclick="resetQuiz('fsQ6',['fsQ6a','fsQ6b','fsQ6c','fsQ6d'])">Reset</button><span class="q-score" id="fsQ6-score"></span></div>
+    </div>
+
+    <div class="card" id="fs22" onclick="tog('fs22')">
+      <div class="day-lbl">THU W5</div>
+      <div>
+        <div class="card-title">Topic 22 — Connect React to Backend (MERN)</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>CORS middleware — allow React to call Express</li>
+          <li>Use <code>axios</code> in React to call your API</li>
+          <li>Store JWT in localStorage, send as <code>Authorization: Bearer TOKEN</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=7CqJlxBYj-M" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">MERN Stack Tutorial</div>
+            <div class="vid-meta"><span class="vid-channel">freeCodeCamp</span><span class="vid-dur">~1 hr 10 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag fs">MERN</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs22',event)">✓</button>
+    </div>
+
+    <div class="card" id="fs23" onclick="tog('fs23')">
+      <div class="day-lbl">WEEK 6<br>Capstone</div>
+      <div>
+        <div class="card-title">🏆 Full Stack Capstone — MERN Blog</div>
+        <div class="learn-head">What to Build</div>
+        <ul class="learn-list">
+          <li>Register/Login with JWT. Protected routes</li>
+          <li>CRUD posts — users can only edit/delete their own</li>
+          <li>Deploy: Backend → Render.com · Frontend → Vercel</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=ngc9gnGgUdA" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Build a Full Stack MERN App</div>
+            <div class="vid-meta"><span class="vid-channel">JS Mastery</span><span class="vid-dur">~1 hr 20 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag proj">Capstone</span><span class="ctag fs">MERN</span></div>
+      </div>
+      <button class="chk" onclick="tog('fs23',event)">✓</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ DEVOPS ═══════════════ -->
+<div class="phase" id="phase-do">
+  <div class="phase-intro">
+    <div class="phase-intro-icon">⚙️</div>
+    <div class="phase-intro-text">
+      <strong>DevOps from Absolute Zero — 8 Weeks</strong><br>
+      Every video is short (10–90 min), topic-specific, and plays directly here. No long 4-hour marathons. Quiz + Practice every 3 topics.
+    </div>
+  </div>
+
+  <div class="week">
+    <div class="week-head">WEEK 1 — <em>Linux &amp; Command Line</em></div>
+
+    <div class="card" id="do1" onclick="tog('do1')">
+      <div class="day-lbl">MON</div>
+      <div>
+        <div class="card-title">Topic 1 — What is DevOps?</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li>Dev builds → Ops deploys → DevOps unifies them with automation</li>
+          <li>Lifecycle: Plan → Code → Build → Test → Deploy → Monitor</li>
+          <li>Tools you'll learn: Linux, Git, Docker, GitHub Actions, AWS, K8s</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=0yWAtQ6wYNM" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">What is DevOps?</div>
+            <div class="vid-meta"><span class="vid-channel">TechWorld with Nana</span><span class="vid-dur">~13 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 1</span><span class="ctag do">Concepts</span></div>
+      </div>
+      <button class="chk" onclick="tog('do1',event)">✓</button>
+    </div>
+
+    <div class="card" id="do2" onclick="tog('do2')">
+      <div class="day-lbl">TUE</div>
+      <div>
+        <div class="card-title">Topic 2 — Linux Command Line Basics</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>ls</code>, <code>cd</code>, <code>pwd</code>, <code>mkdir</code>, <code>rm</code>, <code>cp</code>, <code>mv</code></li>
+          <li><code>cat</code> (view file), <code>nano</code> (edit), <code>grep</code> (search)</li>
+          <li>Use Ubuntu on WSL (Windows) or Terminal (Mac)</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=oxuRxtrO2Ag" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Linux Command Line Crash Course</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 2</span><span class="ctag do">Linux</span></div>
+      </div>
+      <button class="chk" onclick="tog('do2',event)">✓</button>
+    </div>
+
+    <div class="card" id="do3" onclick="tog('do3')">
+      <div class="day-lbl">WED</div>
+      <div>
+        <div class="card-title">Topic 3 — Linux Permissions, Pipes &amp; Processes</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Permissions: <code>chmod 755 file.sh</code> — rwx for owner, rx for others</li>
+          <li>Pipe <code>|</code>: <code>cat file | grep "error"</code></li>
+          <li><code>ps aux</code> — list processes. <code>kill PID</code> — stop one</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=GtovwKDemnI" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Linux Permissions in 10 Minutes</div>
+            <div class="vid-meta"><span class="vid-channel">NetworkChuck</span><span class="vid-dur">~10 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 3</span><span class="ctag do">Linux</span></div>
+      </div>
+      <button class="chk" onclick="tog('do3',event)">✓</button>
+    </div>
+
+    <!-- Quiz DO1 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 1</div><div class="quiz-title">Test: DevOps Concepts &amp; Linux</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="doQ1a"><div class="q-n">Q1 OF 4</div><div class="q-t">Main goal of DevOps?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ1a','a')"><input type="radio" name="doQ1a" value="a"> Replace devs with ops engineers</div><div class="q-opt" onclick="pick('doQ1a','b')"><input type="radio" name="doQ1a" value="b"> Ship software faster &amp; reliably through automation</div><div class="q-opt" onclick="pick('doQ1a','c')"><input type="radio" name="doQ1a" value="c"> Build mobile apps faster</div><div class="q-opt" onclick="pick('doQ1a','d')"><input type="radio" name="doQ1a" value="d"> Manage databases efficiently</div></div></div>
+      <div class="qblock" id="doQ1b"><div class="q-n">Q2 OF 4</div><div class="q-t">Which command shows current directory?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ1b','a')"><input type="radio" name="doQ1b" value="a"> ls</div><div class="q-opt" onclick="pick('doQ1b','b')"><input type="radio" name="doQ1b" value="b"> cd</div><div class="q-opt" onclick="pick('doQ1b','c')"><input type="radio" name="doQ1b" value="c"> pwd</div><div class="q-opt" onclick="pick('doQ1b','d')"><input type="radio" name="doQ1b" value="d"> dir</div></div></div>
+      <div class="qblock" id="doQ1c"><div class="q-n">Q3 OF 4</div><div class="q-t"><code>chmod 755 script.sh</code> sets?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ1c','a')"><input type="radio" name="doQ1c" value="a"> Deletes file</div><div class="q-opt" onclick="pick('doQ1c','b')"><input type="radio" name="doQ1c" value="b"> Copies file</div><div class="q-opt" onclick="pick('doQ1c','c')"><input type="radio" name="doQ1c" value="c"> Owner rwx, others rx</div><div class="q-opt" onclick="pick('doQ1c','d')"><input type="radio" name="doQ1c" value="d"> Encrypts file</div></div></div>
+      <div class="qblock" id="doQ1d"><div class="q-n">Q4 OF 4</div><div class="q-t">The pipe <code>|</code> does?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ1d','a')"><input type="radio" name="doQ1d" value="a"> Separates commands into lines</div><div class="q-opt" onclick="pick('doQ1d','b')"><input type="radio" name="doQ1d" value="b"> Sends output of one command as input to next</div><div class="q-opt" onclick="pick('doQ1d','c')"><input type="radio" name="doQ1d" value="c"> Runs commands in parallel</div><div class="q-opt" onclick="pick('doQ1d','d')"><input type="radio" name="doQ1d" value="d"> Creates new file</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('doQ1',['b','c','c','b'],['doQ1a','doQ1b','doQ1c','doQ1d'])">Submit</button><button class="q-reset" onclick="resetQuiz('doQ1',['doQ1a','doQ1b','doQ1c','doQ1d'])">Reset</button><span class="q-score" id="doQ1-score"></span></div>
+    </div>
+    <div class="practice">
+      <div class="prac-head" onclick="togPrac('pdQ1')"><div class="prac-badge">💪 PRACTICE 1</div><div class="prac-title">Linux Terminal Exercises</div><button class="prac-toggle">▼ Expand</button></div>
+      <div class="prac-body" id="pdQ1">
+        <div class="prac-section-lbl">Exercise 1</div><div class="prac-task"><strong>Navigate &amp; Create:</strong> Create <code>projects/devops/week1/</code>. Inside: notes.txt, commands.sh, readme.md. Run <code>ls -la</code>.</div>
+        <div class="prac-section-lbl">🔥 Challenge</div><div class="prac-task"><strong>System Info Script:</strong> <code>sysinfo.sh</code> prints user, directory, date, disk usage, process count. Make it executable.</div>
+      </div>
+    </div>
+
+    <div class="card" id="do4" onclick="tog('do4')">
+      <div class="day-lbl">THU</div>
+      <div>
+        <div class="card-title">Topic 4 — Bash Scripting</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>First line: <code>#!/bin/bash</code></li>
+          <li>Variables: <code>NAME="DevOps"</code>, use as <code>$NAME</code></li>
+          <li>if/else, for loops, functions</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=tK9Oc6AEnR4" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Bash Scripting Tutorial</div>
+            <div class="vid-meta"><span class="vid-channel">NetworkChuck</span><span class="vid-dur">~1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 4</span><span class="ctag do">Bash</span></div>
+      </div>
+      <button class="chk" onclick="tog('do4',event)">✓</button>
+    </div>
+
+    <div class="card" id="do5" onclick="tog('do5')">
+      <div class="day-lbl">FRI</div>
+      <div>
+        <div class="card-title">Topic 5 — Git Version Control</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Core: <code>git init</code> → <code>add</code> → <code>commit</code> → <code>push</code></li>
+          <li>Branching: <code>git checkout -b feature/login</code></li>
+          <li>Merge conflicts — when two people edit the same line</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=USjZcfj8yxE" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Git &amp; GitHub Crash Course 2021</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~1 hr 10 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 5</span><span class="ctag do">Git</span></div>
+      </div>
+      <button class="chk" onclick="tog('do5',event)">✓</button>
+    </div>
+
+    <div class="card" id="do6" onclick="tog('do6')">
+      <div class="day-lbl">SAT</div>
+      <div>
+        <div class="card-title">Topic 6 — Networking Basics</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Common ports: 22 (SSH), 80 (HTTP), 443 (HTTPS), 3000 (Node)</li>
+          <li>SSH: <code>ssh user@server-ip</code></li>
+          <li>Firewall — controls which ports are open/closed</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=qiQR5rTSshw" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Computer Networking Crash Course</div>
+            <div class="vid-meta"><span class="vid-channel">freeCodeCamp</span><span class="vid-dur">~1 hr 10 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 6</span><span class="ctag do">Networking</span></div>
+      </div>
+      <button class="chk" onclick="tog('do6',event)">✓</button>
+    </div>
+
+    <!-- Quiz DO2 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 2</div><div class="quiz-title">Test: Bash, Git &amp; Networking</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="doQ2a"><div class="q-n">Q1 OF 4</div><div class="q-t">First line of every Bash script?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ2a','a')"><input type="radio" name="doQ2a" value="a"> # bash start</div><div class="q-opt" onclick="pick('doQ2a','b')"><input type="radio" name="doQ2a" value="b"> #!/bin/bash</div><div class="q-opt" onclick="pick('doQ2a','c')"><input type="radio" name="doQ2a" value="c"> @bash</div><div class="q-opt" onclick="pick('doQ2a','d')"><input type="radio" name="doQ2a" value="d"> start bash</div></div></div>
+      <div class="qblock" id="doQ2b"><div class="q-n">Q2 OF 4</div><div class="q-t"><code>git checkout -b feature/login</code> does?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ2b','a')"><input type="radio" name="doQ2b" value="a"> Deletes branch</div><div class="q-opt" onclick="pick('doQ2b','b')"><input type="radio" name="doQ2b" value="b"> Creates feature/login and switches to it</div><div class="q-opt" onclick="pick('doQ2b','c')"><input type="radio" name="doQ2b" value="c"> Merges to main</div><div class="q-opt" onclick="pick('doQ2b','d')"><input type="radio" name="doQ2b" value="d"> Pushes to GitHub</div></div></div>
+      <div class="qblock" id="doQ2c"><div class="q-n">Q3 OF 4</div><div class="q-t">Default SSH port?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ2c','a')"><input type="radio" name="doQ2c" value="a"> 80</div><div class="q-opt" onclick="pick('doQ2c','b')"><input type="radio" name="doQ2c" value="b"> 443</div><div class="q-opt" onclick="pick('doQ2c','c')"><input type="radio" name="doQ2c" value="c"> 22</div><div class="q-opt" onclick="pick('doQ2c','d')"><input type="radio" name="doQ2c" value="d"> 3000</div></div></div>
+      <div class="qblock" id="doQ2d"><div class="q-n">Q4 OF 4</div><div class="q-t">Correct order to save Git changes?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ2d','a')"><input type="radio" name="doQ2d" value="a"> commit → add → push</div><div class="q-opt" onclick="pick('doQ2d','b')"><input type="radio" name="doQ2d" value="b"> push → add → commit</div><div class="q-opt" onclick="pick('doQ2d','c')"><input type="radio" name="doQ2d" value="c"> add → commit → push</div><div class="q-opt" onclick="pick('doQ2d','d')"><input type="radio" name="doQ2d" value="d"> init → commit → push</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('doQ2',['b','b','c','c'],['doQ2a','doQ2b','doQ2c','doQ2d'])">Submit</button><button class="q-reset" onclick="resetQuiz('doQ2',['doQ2a','doQ2b','doQ2c','doQ2d'])">Reset</button><span class="q-score" id="doQ2-score"></span></div>
+    </div>
+    <div class="practice">
+      <div class="prac-head" onclick="togPrac('pdQ2')"><div class="prac-badge">💪 PRACTICE 2</div><div class="prac-title">Bash &amp; Git Exercises</div><button class="prac-toggle">▼ Expand</button></div>
+      <div class="prac-body" id="pdQ2">
+        <div class="prac-section-lbl">Exercise 1</div><div class="prac-task"><strong>Backup Script:</strong> <code>backup.sh</code> takes folder path, creates timestamped zip, prints confirmation.</div>
+        <div class="prac-section-lbl">🔥 Challenge</div><div class="prac-task"><strong>Health Check:</strong> <code>healthcheck.sh</code> — curl a URL, HTTP 200 = ✅ UP, else ❌ DOWN + log timestamp.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Docker -->
+  <div class="week">
+    <div class="week-head">WEEK 2–3 — <em>Docker (Containers)</em></div>
+
+    <div class="card" id="do7" onclick="tog('do7')">
+      <div class="day-lbl">MON W2</div>
+      <div>
+        <div class="card-title">Topic 7 — What is Docker?</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li>"It works on my machine" problem → containers solve this</li>
+          <li><strong>Image</strong> = template. <strong>Container</strong> = running instance</li>
+          <li>Docker vs VM: Containers share host OS (much lighter)</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=Gjnup-PuquQ" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Docker in 100 Seconds + then Nana's crash course below</div>
+            <div class="vid-meta"><span class="vid-channel">Fireship</span><span class="vid-dur">~2 min + 1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 7</span><span class="ctag do">Docker</span></div>
+      </div>
+      <button class="chk" onclick="tog('do7',event)">✓</button>
+    </div>
+
+    <div class="card" id="do8" onclick="tog('do8')">
+      <div class="day-lbl">TUE W2</div>
+      <div>
+        <div class="card-title">Topic 8 — Docker Commands &amp; Dockerfile</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li><code>docker run -p 8080:80 nginx</code>, <code>docker ps</code>, <code>docker stop</code></li>
+          <li>Dockerfile: FROM, WORKDIR, COPY, RUN, EXPOSE, CMD</li>
+          <li><code>docker build -t my-app:1.0 .</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=pg19Z8LL06w" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Docker Tutorial for Beginners (Crash Course)</div>
+            <div class="vid-meta"><span class="vid-channel">TechWorld with Nana</span><span class="vid-dur">~1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 8</span><span class="ctag do">Docker</span></div>
+      </div>
+      <button class="chk" onclick="tog('do8',event)">✓</button>
+    </div>
+
+    <div class="card" id="do9" onclick="tog('do9')">
+      <div class="day-lbl">WED W2</div>
+      <div>
+        <div class="card-title">Topic 9 — Docker Compose</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Define all containers in one YAML → <code>docker compose up</code></li>
+          <li>Services, ports, volumes, networks, depends_on</li>
+          <li>Environment variables in <code>.env</code> file</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=SXwC9fSwct8" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Docker Compose Tutorial (1 Hour)</div>
+            <div class="vid-meta"><span class="vid-channel">TechWorld with Nana</span><span class="vid-dur">~1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 9</span><span class="ctag do">Docker</span></div>
+      </div>
+      <button class="chk" onclick="tog('do9',event)">✓</button>
+    </div>
+
+    <!-- Quiz DO3 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 3</div><div class="quiz-title">Test: Docker Fundamentals</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="doQ3a"><div class="q-n">Q1 OF 4</div><div class="q-t">Difference: Image vs Container?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ3a','a')"><input type="radio" name="doQ3a" value="a"> Same thing</div><div class="q-opt" onclick="pick('doQ3a','b')"><input type="radio" name="doQ3a" value="b"> Image = template; Container = running instance</div><div class="q-opt" onclick="pick('doQ3a','c')"><input type="radio" name="doQ3a" value="c"> Container = template; Image = running</div><div class="q-opt" onclick="pick('doQ3a','d')"><input type="radio" name="doQ3a" value="d"> Images on Windows, Containers on Linux</div></div></div>
+      <div class="qblock" id="doQ3b"><div class="q-n">Q2 OF 4</div><div class="q-t"><code>docker run -p 3000:8080 app</code> means?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ3b','a')"><input type="radio" name="doQ3b" value="a"> Port 3000 only</div><div class="q-opt" onclick="pick('doQ3b','b')"><input type="radio" name="doQ3b" value="b"> Host 3000 → Container 8080</div><div class="q-opt" onclick="pick('doQ3b','c')"><input type="radio" name="doQ3b" value="c"> 3000 instances</div><div class="q-opt" onclick="pick('doQ3b','d')"><input type="radio" name="doQ3b" value="d"> Container 3000 → Host 8080</div></div></div>
+      <div class="qblock" id="doQ3c"><div class="q-n">Q3 OF 4</div><div class="q-t">Dockerfile instruction for working directory?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ3c','a')"><input type="radio" name="doQ3c" value="a"> DIR</div><div class="q-opt" onclick="pick('doQ3c','b')"><input type="radio" name="doQ3c" value="b"> FOLDER</div><div class="q-opt" onclick="pick('doQ3c','c')"><input type="radio" name="doQ3c" value="c"> WORKDIR</div><div class="q-opt" onclick="pick('doQ3c','d')"><input type="radio" name="doQ3c" value="d"> CD</div></div></div>
+      <div class="qblock" id="doQ3d"><div class="q-n">Q4 OF 4</div><div class="q-t">Start all Docker Compose services?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ3d','a')"><input type="radio" name="doQ3d" value="a"> docker start all</div><div class="q-opt" onclick="pick('doQ3d','b')"><input type="radio" name="doQ3d" value="b"> docker run compose</div><div class="q-opt" onclick="pick('doQ3d','c')"><input type="radio" name="doQ3d" value="c"> docker compose up</div><div class="q-opt" onclick="pick('doQ3d','d')"><input type="radio" name="doQ3d" value="d"> docker-compose start</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('doQ3',['b','b','c','c'],['doQ3a','doQ3b','doQ3c','doQ3d'])">Submit</button><button class="q-reset" onclick="resetQuiz('doQ3',['doQ3a','doQ3b','doQ3c','doQ3d'])">Reset</button><span class="q-score" id="doQ3-score"></span></div>
+    </div>
+    <div class="practice">
+      <div class="prac-head" onclick="togPrac('pdQ3')"><div class="prac-badge">💪 PRACTICE 3</div><div class="prac-title">Docker Exercises</div><button class="prac-toggle">▼ Expand</button></div>
+      <div class="prac-body" id="pdQ3">
+        <div class="prac-section-lbl">Exercise 1</div><div class="prac-task"><strong>Dockerize Node App:</strong> Dockerfile: node:18-alpine, npm install, EXPOSE 3000. Build &amp; run.</div>
+        <div class="prac-section-lbl">🔥 Challenge</div><div class="prac-task"><strong>3-Container Stack:</strong> React frontend (nginx), Node backend, MongoDB. One <code>docker compose up</code>.</div>
+      </div>
+    </div>
+
+    <div class="card" id="do10" onclick="tog('do10')">
+      <div class="day-lbl">MON W3</div>
+      <div>
+        <div class="card-title">Topic 10 — CI/CD Concepts</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li>CI = every push auto runs tests. CD = auto deploys after tests pass</li>
+          <li>Pipeline: Code → Build → Test → Deploy</li>
+          <li>Without CI/CD: manual deploys, high stress. With it: deploy confidently 10×/day</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=scEDHsr3APg" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">CI/CD Explained in 8 Minutes</div>
+            <div class="vid-meta"><span class="vid-channel">TechWorld with Nana</span><span class="vid-dur">~8 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 10</span><span class="ctag do">CI/CD</span></div>
+      </div>
+      <button class="chk" onclick="tog('do10',event)">✓</button>
+    </div>
+
+    <div class="card" id="do11" onclick="tog('do11')">
+      <div class="day-lbl">TUE W3</div>
+      <div>
+        <div class="card-title">Topic 11 — GitHub Actions</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Workflow file: <code>.github/workflows/main.yml</code></li>
+          <li>Structure: <code>on</code> (trigger), <code>jobs</code>, <code>steps</code></li>
+          <li>GitHub Secrets — never hardcode passwords in YAML!</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=R8_veQiYBjI" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">GitHub Actions CI/CD Tutorial</div>
+            <div class="vid-meta"><span class="vid-channel">TechWorld with Nana</span><span class="vid-dur">~1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 11</span><span class="ctag do">CI/CD</span></div>
+      </div>
+      <button class="chk" onclick="tog('do11',event)">✓</button>
+    </div>
+
+    <div class="card" id="do12" onclick="tog('do12')">
+      <div class="day-lbl">WED W3</div>
+      <div>
+        <div class="card-title">Topic 12 — AWS Basics (EC2 &amp; S3)</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li><strong>EC2</strong> = virtual computer in the cloud. SSH in and run your app</li>
+          <li><strong>S3</strong> = unlimited file / static website storage (free tier)</li>
+          <li><strong>IAM</strong> = who can do what on your AWS account</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=a9__D53WsUs" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">AWS Crash Course for Beginners</div>
+            <div class="vid-meta"><span class="vid-channel">TechWorld with Nana</span><span class="vid-dur">~1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 12</span><span class="ctag do">AWS</span></div>
+      </div>
+      <button class="chk" onclick="tog('do12',event)">✓</button>
+    </div>
+
+    <!-- Quiz DO4 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 4</div><div class="quiz-title">Test: CI/CD &amp; Cloud</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="doQ4a"><div class="q-n">Q1 OF 4</div><div class="q-t">What does CI mainly do?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ4a','a')"><input type="radio" name="doQ4a" value="a"> Deploys to production</div><div class="q-opt" onclick="pick('doQ4a','b')"><input type="radio" name="doQ4a" value="b"> Auto builds and tests on every push</div><div class="q-opt" onclick="pick('doQ4a','c')"><input type="radio" name="doQ4a" value="c"> Manages cloud</div><div class="q-opt" onclick="pick('doQ4a','d')"><input type="radio" name="doQ4a" value="d"> Backs up DB</div></div></div>
+      <div class="qblock" id="doQ4b"><div class="q-n">Q2 OF 4</div><div class="q-t">Where to store secrets in GitHub Actions?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ4b','a')"><input type="radio" name="doQ4b" value="a"> In YAML directly</div><div class="q-opt" onclick="pick('doQ4b','b')"><input type="radio" name="doQ4b" value="b"> In a config.js</div><div class="q-opt" onclick="pick('doQ4b','c')"><input type="radio" name="doQ4b" value="c"> GitHub Secrets (Settings → Secrets)</div><div class="q-opt" onclick="pick('doQ4b','d')"><input type="radio" name="doQ4b" value="d"> In README</div></div></div>
+      <div class="qblock" id="doQ4c"><div class="q-n">Q3 OF 4</div><div class="q-t">AWS EC2 is?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ4c','a')"><input type="radio" name="doQ4c" value="a"> File storage service</div><div class="q-opt" onclick="pick('doQ4c','b')"><input type="radio" name="doQ4c" value="b"> Virtual computer in cloud</div><div class="q-opt" onclick="pick('doQ4c','c')"><input type="radio" name="doQ4c" value="c"> Database service</div><div class="q-opt" onclick="pick('doQ4c','d')"><input type="radio" name="doQ4c" value="d"> DNS tool</div></div></div>
+      <div class="qblock" id="doQ4d"><div class="q-n">Q4 OF 4</div><div class="q-t"><code>on: push</code> in workflow does?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ4d','a')"><input type="radio" name="doQ4d" value="a"> Pushes code to repo</div><div class="q-opt" onclick="pick('doQ4d','b')"><input type="radio" name="doQ4d" value="b"> Triggers workflow on every code push</div><div class="q-opt" onclick="pick('doQ4d','c')"><input type="radio" name="doQ4d" value="c"> Sends push notification</div><div class="q-opt" onclick="pick('doQ4d','d')"><input type="radio" name="doQ4d" value="d"> Runs only on main</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('doQ4',['b','c','b','b'],['doQ4a','doQ4b','doQ4c','doQ4d'])">Submit</button><button class="q-reset" onclick="resetQuiz('doQ4',['doQ4a','doQ4b','doQ4c','doQ4d'])">Reset</button><span class="q-score" id="doQ4-score"></span></div>
+    </div>
+    <div class="practice">
+      <div class="prac-head" onclick="togPrac('pdQ4')"><div class="prac-badge">💪 PRACTICE 4</div><div class="prac-title">CI/CD Exercises</div><button class="prac-toggle">▼ Expand</button></div>
+      <div class="prac-body" id="pdQ4">
+        <div class="prac-section-lbl">Exercise 1</div><div class="prac-task"><strong>First Workflow:</strong> Node.js + Jest test. On push → install → test. Watch pass in Actions tab.</div>
+        <div class="prac-section-lbl">🔥 Challenge</div><div class="prac-task"><strong>Full Pipeline:</strong> Push → tests → Docker build → push Docker Hub → SSH deploy to EC2 → health check.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- K8s + Terraform -->
+  <div class="week">
+    <div class="week-head">WEEK 4–5 — <em>Kubernetes &amp; Terraform</em></div>
+
+    <div class="card" id="do13" onclick="tog('do13')">
+      <div class="day-lbl">MON W4</div>
+      <div>
+        <div class="card-title">Topic 13 — Kubernetes Basics</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li>Docker alone: crashes → nothing restarts. K8s auto-restarts, auto-scales</li>
+          <li><strong>Pod</strong> = smallest unit. <strong>Deployment</strong> = manages pods. <strong>Service</strong> = exposes them</li>
+          <li><code>minikube start</code> → local K8s cluster to practice on</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=s_o8dwzRlu4" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Kubernetes Crash Course for Beginners</div>
+            <div class="vid-meta"><span class="vid-channel">TechWorld with Nana</span><span class="vid-dur">~1 hr 15 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 13</span><span class="ctag do">Kubernetes</span></div>
+      </div>
+      <button class="chk" onclick="tog('do13',event)">✓</button>
+    </div>
+
+    <div class="card" id="do14" onclick="tog('do14')">
+      <div class="day-lbl">TUE W4</div>
+      <div>
+        <div class="card-title">Topic 14 — K8s YAML &amp; Deployments</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>YAML: <code>apiVersion</code>, <code>kind</code>, <code>metadata</code>, <code>spec</code></li>
+          <li>Service types: ClusterIP, NodePort, LoadBalancer</li>
+          <li>ConfigMaps and Secrets for environment variables</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=X48VuDVv0do" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Kubernetes Tutorial (YAML section)</div>
+            <div class="vid-meta"><span class="vid-channel">TechWorld with Nana</span><span class="vid-dur">~45 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag do">Kubernetes</span></div>
+      </div>
+      <button class="chk" onclick="tog('do14',event)">✓</button>
+    </div>
+
+    <div class="card" id="do15" onclick="tog('do15')">
+      <div class="day-lbl">WED W4</div>
+      <div>
+        <div class="card-title">Topic 15 — Terraform: Infrastructure as Code</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li>Write code to describe your servers instead of clicking AWS manually</li>
+          <li><code>terraform init</code> → <code>plan</code> (preview) → <code>apply</code> (create) → <code>destroy</code></li>
+          <li>Resources: <code>aws_instance</code>, <code>aws_s3_bucket</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=l5k1ai_GBDE" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Terraform Crash Course</div>
+            <div class="vid-meta"><span class="vid-channel">freeCodeCamp</span><span class="vid-dur">~1 hr 10 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 15</span><span class="ctag do">Terraform</span></div>
+      </div>
+      <button class="chk" onclick="tog('do15',event)">✓</button>
+    </div>
+
+    <!-- Quiz DO5 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 5</div><div class="quiz-title">Test: Kubernetes &amp; Terraform</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="doQ5a"><div class="q-n">Q1 OF 4</div><div class="q-t">Smallest unit in Kubernetes?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ5a','a')"><input type="radio" name="doQ5a" value="a"> Container</div><div class="q-opt" onclick="pick('doQ5a','b')"><input type="radio" name="doQ5a" value="b"> Pod</div><div class="q-opt" onclick="pick('doQ5a','c')"><input type="radio" name="doQ5a" value="c"> Node</div><div class="q-opt" onclick="pick('doQ5a','d')"><input type="radio" name="doQ5a" value="d"> Cluster</div></div></div>
+      <div class="qblock" id="doQ5b"><div class="q-n">Q2 OF 4</div><div class="q-t"><code>kubectl apply -f app.yaml</code> does?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ5b','a')"><input type="radio" name="doQ5b" value="a"> Deletes the app</div><div class="q-opt" onclick="pick('doQ5b','b')"><input type="radio" name="doQ5b" value="b"> Creates/updates K8s resources in yaml</div><div class="q-opt" onclick="pick('doQ5b','c')"><input type="radio" name="doQ5b" value="c"> Connects to the app</div><div class="q-opt" onclick="pick('doQ5b','d')"><input type="radio" name="doQ5b" value="d"> Tests the app</div></div></div>
+      <div class="qblock" id="doQ5c"><div class="q-n">Q3 OF 4</div><div class="q-t"><code>terraform plan</code> does?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ5c','a')"><input type="radio" name="doQ5c" value="a"> Creates resources immediately</div><div class="q-opt" onclick="pick('doQ5c','b')"><input type="radio" name="doQ5c" value="b"> Shows preview WITHOUT applying</div><div class="q-opt" onclick="pick('doQ5c','c')"><input type="radio" name="doQ5c" value="c"> Deletes infrastructure</div><div class="q-opt" onclick="pick('doQ5c','d')"><input type="radio" name="doQ5c" value="d"> Initialises project</div></div></div>
+      <div class="qblock" id="doQ5d"><div class="q-n">Q4 OF 4</div><div class="q-t">K8s resource that keeps X replicas always running?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ5d','a')"><input type="radio" name="doQ5d" value="a"> Service</div><div class="q-opt" onclick="pick('doQ5d','b')"><input type="radio" name="doQ5d" value="b"> ConfigMap</div><div class="q-opt" onclick="pick('doQ5d','c')"><input type="radio" name="doQ5d" value="c"> Namespace</div><div class="q-opt" onclick="pick('doQ5d','d')"><input type="radio" name="doQ5d" value="d"> Deployment</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('doQ5',['b','b','b','d'],['doQ5a','doQ5b','doQ5c','doQ5d'])">Submit</button><button class="q-reset" onclick="resetQuiz('doQ5',['doQ5a','doQ5b','doQ5c','doQ5d'])">Reset</button><span class="q-score" id="doQ5-score"></span></div>
+    </div>
+  </div>
+
+  <!-- Monitoring + Capstone -->
+  <div class="week">
+    <div class="week-head">WEEK 6–8 — <em>Monitoring, Security &amp; Capstone</em></div>
+
+    <div class="card" id="do16" onclick="tog('do16')">
+      <div class="day-lbl">MON W6</div>
+      <div>
+        <div class="card-title">Topic 16 — Prometheus &amp; Grafana</div>
+        <div class="learn-head">Beginner Explanation</div>
+        <ul class="learn-list">
+          <li>Know BEFORE users that something is broken</li>
+          <li><strong>Prometheus</strong> collects metrics. <strong>Grafana</strong> visualises them</li>
+          <li><code>npm install prom-client</code> → expose <code>/metrics</code> endpoint</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=h4Sl21AKiDg" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Prometheus &amp; Grafana Tutorial</div>
+            <div class="vid-meta"><span class="vid-channel">TechWorld with Nana</span><span class="vid-dur">~1 hr 10 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag note">Day 16</span><span class="ctag do">Monitoring</span></div>
+      </div>
+      <button class="chk" onclick="tog('do16',event)">✓</button>
+    </div>
+
+    <div class="card" id="do17" onclick="tog('do17')">
+      <div class="day-lbl">TUE W6</div>
+      <div>
+        <div class="card-title">Topic 17 — Nginx Reverse Proxy &amp; HTTPS</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Nginx receives traffic → routes to your app on port 3000</li>
+          <li>Free HTTPS: Let's Encrypt + Certbot SSL certificate</li>
+          <li>Config: <code>server_name</code>, <code>proxy_pass</code>, rate limiting</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=7VAI73roXaY" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Nginx Crash Course</div>
+            <div class="vid-meta"><span class="vid-channel">Traversy Media</span><span class="vid-dur">~45 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag do">Nginx</span><span class="ctag do">SSL</span></div>
+      </div>
+      <button class="chk" onclick="tog('do17',event)">✓</button>
+    </div>
+
+    <div class="card" id="do18" onclick="tog('do18')">
+      <div class="day-lbl">THU W6</div>
+      <div>
+        <div class="card-title">Topic 18 — DevSecOps Security Basics</div>
+        <div class="learn-head">What to Learn</div>
+        <ul class="learn-list">
+          <li>Scan Docker images with Trivy for vulnerabilities</li>
+          <li>OWASP Top 10 — most common web security flaws</li>
+          <li><strong>Never commit secrets to git.</strong> Use <code>.env</code> + <code>.gitignore</code></li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=F5KJVuii0Yw" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">DevSecOps Explained</div>
+            <div class="vid-meta"><span class="vid-channel">TechWorld with Nana</span><span class="vid-dur">~30 min</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag do">Security</span></div>
+      </div>
+      <button class="chk" onclick="tog('do18',event)">✓</button>
+    </div>
+
+    <!-- Quiz DO6 -->
+    <div class="quiz">
+      <div class="quiz-head"><div class="quiz-badge">📝 QUIZ 6</div><div class="quiz-title">Test: Monitoring, Nginx &amp; Security</div></div>
+      <div class="quiz-sub">Pass = 3/4 correct.</div>
+      <div class="qblock" id="doQ6a"><div class="q-n">Q1 OF 4</div><div class="q-t">Grafana is used for?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ6a','a')"><input type="radio" name="doQ6a" value="a"> Storing logs</div><div class="q-opt" onclick="pick('doQ6a','b')"><input type="radio" name="doQ6a" value="b"> Visualising metrics in dashboards</div><div class="q-opt" onclick="pick('doQ6a','c')"><input type="radio" name="doQ6a" value="c"> Running containers</div><div class="q-opt" onclick="pick('doQ6a','d')"><input type="radio" name="doQ6a" value="d"> Managing DNS</div></div></div>
+      <div class="qblock" id="doQ6b"><div class="q-n">Q2 OF 4</div><div class="q-t">Role of Nginx as reverse proxy?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ6b','a')"><input type="radio" name="doQ6b" value="a"> Run Node.js app directly</div><div class="q-opt" onclick="pick('doQ6b','b')"><input type="radio" name="doQ6b" value="b"> Store website files</div><div class="q-opt" onclick="pick('doQ6b','c')"><input type="radio" name="doQ6b" value="c"> Receive requests, route to correct backend</div><div class="q-opt" onclick="pick('doQ6b','d')"><input type="radio" name="doQ6b" value="d"> Replace database</div></div></div>
+      <div class="qblock" id="doQ6c"><div class="q-n">Q3 OF 4</div><div class="q-t">Where should production secrets go?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ6c','a')"><input type="radio" name="doQ6c" value="a"> GitHub repo config</div><div class="q-opt" onclick="pick('doQ6c','b')"><input type="radio" name="doQ6c" value="b"> In README</div><div class="q-opt" onclick="pick('doQ6c','c')"><input type="radio" name="doQ6c" value="c"> Env variables / secrets manager, never in code</div><div class="q-opt" onclick="pick('doQ6c','d')"><input type="radio" name="doQ6c" value="d"> Inside Docker image</div></div></div>
+      <div class="qblock" id="doQ6d"><div class="q-n">Q4 OF 4</div><div class="q-t">Trivy does?</div><div class="q-opts"><div class="q-opt" onclick="pick('doQ6d','a')"><input type="radio" name="doQ6d" value="a"> Runs tests</div><div class="q-opt" onclick="pick('doQ6d','b')"><input type="radio" name="doQ6d" value="b"> Scans Docker images for vulnerabilities</div><div class="q-opt" onclick="pick('doQ6d','c')"><input type="radio" name="doQ6d" value="c"> Monitors CPU</div><div class="q-opt" onclick="pick('doQ6d','d')"><input type="radio" name="doQ6d" value="d"> Manages K8s deployments</div></div></div>
+      <div class="quiz-actions"><button class="q-submit" onclick="gradeQuiz('doQ6',['b','c','c','b'],['doQ6a','doQ6b','doQ6c','doQ6d'])">Submit</button><button class="q-reset" onclick="resetQuiz('doQ6',['doQ6a','doQ6b','doQ6c','doQ6d'])">Reset</button><span class="q-score" id="doQ6-score"></span></div>
+    </div>
+
+    <div class="card" id="do19" onclick="tog('do19')">
+      <div class="day-lbl">WEEK 7–8<br>Capstone</div>
+      <div>
+        <div class="card-title">🏆 DevOps Capstone — Full Production Pipeline</div>
+        <div class="learn-head">What to Build</div>
+        <ul class="learn-list">
+          <li><strong>Week 7:</strong> Push → Actions → tests → Docker build → push Docker Hub → deploy EC2 → Nginx + HTTPS</li>
+          <li>Prometheus + Grafana monitoring with alerting</li>
+          <li><strong>Week 8:</strong> Terraform provisions all AWS infrastructure. Architecture diagram. Update LinkedIn. Start applying! 🎉</li>
+        </ul>
+        <a class="vid-card" href="https://www.youtube.com/watch?v=R8_veQiYBjI" target="_blank" onclick="event.stopPropagation()">
+          <div class="vid-play-circle"></div>
+          <div class="vid-info">
+            <div class="vid-title-text">Complete CI/CD Pipeline Project</div>
+            <div class="vid-meta"><span class="vid-channel">TechWorld with Nana</span><span class="vid-dur">~1 hr</span><span class="vid-yt-badge">▶ YOUTUBE</span></div>
+          </div>
+        </a>
+        <div class="ctags"><span class="ctag proj">Capstone</span><span class="ctag proj">Job Ready!</span></div>
+      </div>
+      <button class="chk" onclick="tog('do19',event)">✓</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+const SK='devRoadmap_v7';
+const load=()=>{try{return JSON.parse(localStorage.getItem(SK))||{};}catch{return{}}};
+const save=s=>{try{localStorage.setItem(SK,JSON.stringify(s));}catch{}};
+
+function tog(id,e){
+  if(e)e.stopPropagation();
+  const el=document.getElementById(id);if(!el)return;
+  const s=load();const now=!el.classList.contains('done');
+  el.classList.toggle('done',now);s[id]=now;save(s);refreshProg();
+}
+
+function refreshProg(){
+  const s=load();
+  const all=document.querySelectorAll('.card[id]');
+  const total=all.length;
+  const done=Object.values(s).filter(Boolean).length;
+  document.getElementById('pCount').textContent=`${done} / ${total} days`;
+  document.getElementById('pFill').style.width=total?(done/total*100)+'%':'0%';
+}
+
+function switchTab(p){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.phase').forEach(ph=>ph.classList.remove('show'));
+  document.querySelector(`.tab[data-p="${p}"]`).classList.add('active');
+  document.getElementById('phase-'+p).classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+
+
+function pick(qid,val){
+  document.querySelectorAll(`#${qid} .q-opt`).forEach(o=>o.classList.remove('sel'));
+  event.currentTarget.classList.add('sel');
+  event.currentTarget.querySelector('input').checked=true;
+}
+
+function gradeQuiz(quizId,answers,qids){
+  let score=0;
+  qids.forEach((qid,i)=>{
+    const sel=document.querySelector(`[name="${qid}"]:checked`);
+    document.querySelectorAll(`#${qid} .q-opt`).forEach(o=>{
+      if(o.querySelector('input').value===answers[i])o.classList.add('ok');
+    });
+    if(sel){
+      if(sel.value===answers[i]){score++;sel.closest('.q-opt').classList.add('ok');}
+      else sel.closest('.q-opt').classList.add('bad');
+    }
+    document.querySelectorAll(`#${qid} .q-opt`).forEach(o=>o.style.pointerEvents='none');
+  });
+  const el=document.getElementById(quizId+'-score');
+  const pass=score>=Math.ceil(qids.length*0.75);
+  el.textContent=`${score}/${qids.length} — ${pass?'✓ Passed!':'Review & Retry'}`;
+  el.className='q-score show '+(pass?'pass':'fail');
+  event.currentTarget.disabled=true;
+}
+
+function resetQuiz(quizId,qids){
+  qids.forEach(qid=>{
+    document.querySelectorAll(`#${qid} .q-opt`).forEach(o=>{
+      o.classList.remove('sel','ok','bad');o.style.pointerEvents='';
+      o.querySelector('input').checked=false;
+    });
+  });
+  const el=document.getElementById(quizId+'-score');
+  el.className='q-score';el.textContent='';
+  const scoreEl=document.getElementById(quizId+'-score');
+  const actionsEl=scoreEl?.closest('.quiz-actions');
+  if(actionsEl){const btn=actionsEl.querySelector('.q-submit');if(btn)btn.disabled=false;}
+}
+
+function togPrac(id){
+  const body=document.getElementById(id);
+  const btn=body.previousElementSibling.querySelector('.prac-toggle');
+  body.classList.toggle('open');
+  btn.textContent=body.classList.contains('open')?'▲ Collapse':'▼ Expand';
+}
+
+function dlFile(){
+  const html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+  const a=Object.assign(document.createElement('a'),{
+    href:URL.createObjectURL(new Blob([html],{type:'text/html'})),
+    download:'dev_roadmap.html'
+  });
+  document.body.appendChild(a);a.click();
+  document.body.removeChild(a);URL.revokeObjectURL(a.href);
+  const t=document.getElementById('toast');
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3600);
+}
+
+function openModal(){document.getElementById('modalBg').classList.add('open')}
+function closeModal(){document.getElementById('modalBg').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+// Restore state
+const saved=load();
+for(const[id,done]of Object.entries(saved)){
+  const el=document.getElementById(id);
+  if(el&&done)el.classList.add('done');
+}
+refreshProg();
+</script>
+</body>
+</html>
